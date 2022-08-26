@@ -9,18 +9,14 @@ const login = (username, password, url) => {
         })
         .then((response) => {
             console.log("🚀 ~ file: auth.api.js ~ line 11 ~ .then ~ response", response)
-            if (response.data.accessToken) {
-                localStorage.setItem("adria-user", JSON.stringify(response.data.email));
+            if (response.data) {
+                localStorage.setItem("adria-user", JSON.stringify(response.data.accessToken));
                 
             }
-            return response.data;
+            return response.data.accessToken;
         }
 
-        ).finally(() => {
-
-            console.log("finally");
-
-        }).catch((error) => {
+        ).catch((error) => {
             console.log("🚀 ~ file: auth.api.js ~ line 21 ~ ).finally ~ error", error)
             return error.response.data;
         }
