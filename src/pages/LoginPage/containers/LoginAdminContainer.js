@@ -5,6 +5,7 @@ import { isEmail } from "validator";
 import React, { useState, useRef } from "react";
 import { useNavigate } from 'react-router';
 import { login } from "../../../store/actions/auth";
+import AlertDismissibleExample from "../../../common/components/error-alert"
 import * as ct from '../../../utils/constants';
 import { useDispatch, useSelector } from "react-redux";
 const URL = ct.default;
@@ -67,10 +68,14 @@ const Login = (props) => {
         }
     };
     if (isLoggedIn) {
-        return <h1>Logged in</h1>;
+        return  navigate("/admin-board");
     }
     return (
+        
         <div className="col-md-12">
+              {message && (
+                        <AlertDismissibleExample props={JSON.parse(message)}/>
+                    )}
             <div className="card card-container">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -85,6 +90,7 @@ const Login = (props) => {
                             className="form-control"
                             name="username"
                             value={username}
+                            placeholder="Email"
                             onChange={onChangeUsername}
                             validations={[required,email]}
                         />
@@ -95,6 +101,7 @@ const Login = (props) => {
                             type="password"
                             className="form-control"
                             name="password"
+                            placeholder="Password"
                             value={password}
                             onChange={onChangePassword}
                             validations={[required]}
@@ -108,13 +115,7 @@ const Login = (props) => {
                             <span>Login</span>
                         </button>
                     </div>
-                    {message && (
-                        <div className="form-group">
-                            <div className="alert alert-danger" role="alert">
-                                {message}
-                            </div>
-                        </div>
-                    )}
+                    
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
             </div>

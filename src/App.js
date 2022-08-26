@@ -27,13 +27,15 @@ function App() {
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
-                  {currentUser.username}
+                  {currentUser.emailUser}
                 </Link>
               </li>
               <li className="nav-item">
-                <button  className="nav-link" onClick={logOut}>
-                  LogOut
-                </button>
+            
+                <Link to={"/login"} className="nav-link" onClick={logOut}>
+                  Log out
+                </Link>
+               
               </li>
             </div>
           ) : (

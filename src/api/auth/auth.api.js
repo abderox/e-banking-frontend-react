@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as type from '../../utils/constants';
+import authHeader from "./auth-header";
 const URL =type.default;
 
 const login = (email, password, url) => {
@@ -11,22 +12,27 @@ const login = (email, password, url) => {
         .then((response) => {
             console.log("🚀 ~ file: auth.api.js ~ line 11 ~ .then ~ response", response)
             if (response.data) {
-                localStorage.setItem("adria-user", JSON.stringify(response.data.accessToken));
+                localStorage.setItem("adria-user", JSON.stringify(response.data));
                 
             }
             return response.data;
-        }
-
-        ).catch((error) => {
-            console.log("🚀 ~ file: auth.api.js ~ line 21 ~ ).finally ~ error", error)
-            return error.response.data;
         }
         );
 };
 
 
 const logout = () => {
-    localStorage.removeItem("adria-user");
+    
+    // getData(URL.API_URL_V2 + URL.SIGN_OUT_URL_ADMIN);
+    
+            // localStorage.removeItem("adria-user");
+
+
+    axios.get(URL.API_URL_V2 + URL.SIGN_OUT_URL_ADMIN,  authHeader() ).then(response => {
+        if (response.status === 200) {
+            localStorage.removeItem("adria-user");
+        }
+    });
 };
 
 export default {

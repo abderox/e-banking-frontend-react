@@ -11,13 +11,8 @@ import AuthApi from '../../api/auth/auth.api';
         return Promise.resolve();
     },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-
+            const message = error.response.data || error;
+               
             dispatch({
                 type: type.LOGIN_FAIL,
             })

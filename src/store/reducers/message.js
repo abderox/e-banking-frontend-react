@@ -6,11 +6,11 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case type.SET_MESSAGE:
             return {
-                message: action.payload
+                message: JSON.stringify(action.payload)
             }
         case type.CLEAR_MESSAGE:
             return {
-                message: ""
+                message: {}
             }
         default:
             return state;
