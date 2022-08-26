@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { AUTH_BASE_URL } from '../../utils/constants';
+import * as type from '../../utils/constants';
+const URL =type.default;
 
-const login = (username, password, url) => {
+const login = (email, password, url) => {
     return axios
-        .post(AUTH_BASE_URL + url, {
-            username,
+        .post(URL.AUTH_BASE_URL + url, {
+            email,
             password,
         })
         .then((response) => {
@@ -13,7 +14,7 @@ const login = (username, password, url) => {
                 localStorage.setItem("adria-user", JSON.stringify(response.data.accessToken));
                 
             }
-            return response.data.accessToken;
+            return response.data;
         }
 
         ).catch((error) => {

@@ -2,11 +2,11 @@ import * as type from './actionTypes';
 import AuthApi from '../../api/auth/auth.api';
 
 
-export const login = (username, password, url) => (dispatch) => {
+ const login = (username, password, url) => (dispatch) => {
     return AuthApi.login(username, password, url).then((response) => {
         dispatch({
-            type: type.LOGIN,
-            payload: { user: data }
+            type: type.LOGIN_SUCCESS,
+            payload: { user: response }
         });
         return Promise.resolve();
     },
@@ -31,9 +31,11 @@ export const login = (username, password, url) => (dispatch) => {
     );
 }
 
-export const logout = () => (dispatch) => {
-    AuthService.logout();
+ const logout = () => (dispatch) => {
+    AuthApi.logout();
     dispatch({
         type: type.LOGOUT,
     });
 };
+
+export  {login, logout};
