@@ -12,9 +12,8 @@ const URL = ct.default;
 const required = (value) => {
     if (!value) {
         return (
-            <div className="alert alert-danger" role="alert">
-                This field is required!
-            </div>
+           
+                <small class ="text-danger ">This field is required !</small>
         );
     }
 };
@@ -22,9 +21,7 @@ const required = (value) => {
 const email = value => {
     if (!isEmail(value)) {
       return (
-        <div className="alert alert-danger" role="alert">
-          This is not a valid email.
-        </div>
+        <small class ="text-danger ">This is not an email format !</small>
       );
     }
   };
@@ -84,7 +81,7 @@ const Login = (props) => {
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <Input
-                            type="email"
+                            type="text"
                             className="form-control"
                             name="username"
                             value={username}

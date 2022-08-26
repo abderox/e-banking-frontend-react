@@ -30,7 +30,7 @@ label {
 
 .button-login {
   margin-top: 10px;
-  background: #0099cc;
+  background: #fd7921;
   border: none;
   padding: 10px;
   color: #fff;
@@ -43,6 +43,10 @@ label {
   font-family: 'Source Sans Pro', sans-serif;
 }
 .button-login:hover {
-  background: #0099cc;
+  background: #f9a825;
   opacity: 0.9;
+}
+
+.error-label {
+  height: 30px;
 }
