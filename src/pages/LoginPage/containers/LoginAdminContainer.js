@@ -1,56 +1,56 @@
+/** 
+ * @author  https://github.com/abderox
+*/
+
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
 import React, { useState, useRef ,useEffect} from "react";
 import { useNavigate } from 'react-router';
 import { login } from "../../../store/actions/auth";
-import AlertDismissibleExample from "../../../common/components/error-alert"
 import * as ct from '../../../utils/constants';
 import Toasts from '../../../common/components/toast';
 import ToastError from '../../../common/components/toastError';
 import moment from 'moment';
 import { connect } from "react-redux";
+import {email, required} from '../../../utils/constraints';
+
 const URL = ct.default;
 
-const required = (value) => {
-    if (!value) {
-        return (
 
-            <small class="text-danger ">This field is required !</small>
-        );
-    }
-};
-
-const email = value => {
-    if (!isEmail(value)) {
-        return (
-            <small class="text-danger ">This is not an email format !</small>
-        );
-    }
-};
 const Login = (props) => {
+    let navigate = useNavigate();
     const form = useRef();
     const checkBtn = useRef();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [dateToFormat, setTime] = useState(moment().format('LTS'));
+    
     const toast = {
         title : "Disclaimer",
-        body : "Please make sure to log out after you get done",
-        position : "top-center"
+        body : "Please make sure to log out whenever you get done .",
+        position : "top-center",
+        place : "toast-position-2"
     }
-    let navigate = useNavigate();
-    const [dateToFormat, setdateToFormat] = useState(moment().format('LTS'));
+    
+    const toastInfo = {
+        title : "Info",
+        body : "The session lasts for 1 hour each time you log in.",
+        position : "top-center",
+        place : "toast-position"
+    }
+    
 
     const updateTime = () => {
-      let clock = moment().format('LTS')
+      return moment().format('LTS')
     }
+
     setInterval(updateTime, 1000)
   
     useEffect(() => {
       let time = updateTime;
-      setdateToFormat(
+      setTime(
         time
       );
     },[]);
@@ -84,6 +84,8 @@ const Login = (props) => {
             setLoading(false);
         }
     };
+
+
     if (props.isLoggedIn) {
         return navigate("/admin-board");
     }
@@ -92,6 +94,8 @@ const Login = (props) => {
         <div className="col-md-12 border-up">
 
             <Toasts props={toast} date={dateToFormat}  />
+            <Toasts props={toastInfo} date={dateToFormat}  />
+
             {props.message && (
                 <ToastError props={JSON.parse(props.message)}  date={dateToFormat} />
             )}

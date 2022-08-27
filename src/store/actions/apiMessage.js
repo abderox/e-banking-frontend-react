@@ -1,3 +1,7 @@
+/** 
+ * @author  https://github.com/abderox
+*/
+
 import * as type from './actionTypes';
 
 

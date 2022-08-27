@@ -1,3 +1,7 @@
+/** 
+ * @author  https://github.com/abderox
+*/
+
 import axios from "axios";
 import authHeader from "./auth-header";
 import * as ct from "../../utils/constants";

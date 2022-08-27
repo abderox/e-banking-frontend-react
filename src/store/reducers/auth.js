@@ -1,3 +1,7 @@
+/** 
+ * @author  https://github.com/abderox
+*/
+
 import * as type from '../actions/actionTypes';
 
 const user = JSON.parse(localStorage.getItem('adria-user'));

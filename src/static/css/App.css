@@ -3,11 +3,13 @@ label {
   margin-top: 10px;
   margin-bottom: 5px;
 }
+
 .card-container.card {
   max-width: 350px !important;
   border-top: 4px solid #fd7921;
   padding: 40px 40px;
 }
+
 .card {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
@@ -20,6 +22,7 @@ label {
   -webkit-box-shadow: #f9a8258c 0px 48px 100px 0px;
   box-shadow: #f9a82538 0px 48px 100px 0px;
 }
+
 .profile-img-card {
   width: 128px !important;
   height: 128px !important;
@@ -45,6 +48,7 @@ label {
   font-size: 16px;
   font-family: 'Source Sans Pro', sans-serif;
 }
+
 .button-login:hover {
   background: #f9a825;
   opacity: 0.9;
@@ -54,7 +58,7 @@ label {
   height: 30px;
 }
 
-#username{
+#username {
   /* border : none; */
   border: 1px solid #ccc !important;
   border-radius: 4px !important;
@@ -64,4 +68,23 @@ label {
 .form-control:focus {
   border-color: #fd7921 !important;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+}
+
+#toast-position {
+  top: 110px !important;
+  /* border:none !important; */
+}
+
+#toast-position-2 {
+  top: 30px !important;
+ 
+}
+
+.toast {
+  background: rgba(255,255,255,0.4); /* translucent white */
+  backdrop-filter: blur(10px);
+  border-right:none !important;
+  border-left:none !important;
+  border-bottom: 3px solid rgb(209, 172, 5) !important;
+  border-top: 1px solid rgba(209, 172, 5, 0.384) !important;
 }

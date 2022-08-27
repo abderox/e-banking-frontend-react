@@ -9,7 +9,7 @@ function Toasts({ props, dateToFormat }) {
     const [showA, setShowA] = useState(true);
         
     return (
-        <ToastContainer className="p-3" position={props.position}>
+        <ToastContainer className={`p-3 `} position={props.position} id={props.place} >
             <Toast onClose={()=>(setShowA(!showA))} show={showA} >
                 <Toast.Header >
                     <img
