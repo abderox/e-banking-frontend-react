@@ -5,7 +5,7 @@ label {
 }
 
 .card-container.card {
-  max-width: 350px !important;
+  max-width: 400px !important;
   border-top: 4px solid #fd7921;
   padding: 40px 40px;
 }
@@ -111,4 +111,8 @@ label {
 .more-high {
   top : 27% !important;
   margin-top: 100px !important;
+}
+
+.password-check{
+  font-size: 10px;
 }

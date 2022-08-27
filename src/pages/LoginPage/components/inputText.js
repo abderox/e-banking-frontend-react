@@ -8,12 +8,12 @@ function InputText({ props ,handleChange , value , email , required}) {
             <div className="d-flex justify-content-between">
                 {props.img && (
 
-                    <div className="">
+                    <div className="mt-1 col-2">
                         <img src={props.img} alt={props.alt} />
                     </div>
                 )}
 
-                <div className="">
+                <div className="col">
                     <Input
                         id={props.placeholder}
                         type={props.type}

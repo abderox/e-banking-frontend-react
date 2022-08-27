@@ -12,7 +12,6 @@ import ToastError from '../../../common/components/toastError';
 import moment from 'moment';
 import { connect } from "react-redux";
 import FormLogin from "../components/FormLogin";
-import PopoverPositioned from "../../../common/components/popover";
 
 const URL = ct.default;
 
