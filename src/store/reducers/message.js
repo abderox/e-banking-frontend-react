@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
             }
         case type.CLEAR_MESSAGE:
             return {
-                message: {}
+                message: null
             }
         default:
             return state;

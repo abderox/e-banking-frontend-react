@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import  { useState, useRef } from "react";
+import  { useState, useRef , useEffect } from "react";
 import { useNavigate } from 'react-router';
 import { connect } from "react-redux";
 import { email, required } from '../../../utils/constraints';
@@ -21,6 +21,15 @@ function FormLogin(props) {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
+    const [mQuery, setMQuery] = useState({
+        matches: window.innerWidth > 768 ? true : false,
+      });
+      
+      useEffect(() => {
+        let mediaQuery = window.matchMedia("(min-width: 768px)");
+        mediaQuery.addListener(setMQuery);    
+        return () => mediaQuery.removeListener(setMQuery);
+      }, []);
     
     const userNameInput = {
         placeholder : "Email",
@@ -71,9 +80,9 @@ function FormLogin(props) {
     };
     
   return (
-    <div className="card card-container ">
+    <div className={`card card-container ${mQuery && mQuery.matches ? "" : "more-high"}`}>
                 <img
-                    src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/128/FD7E14/external-login-online-learning-fauzidea-detailed-outline-fauzidea.png"
+                    src={mQuery && mQuery.matches ? "https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/128/FD7E14/external-login-online-learning-fauzidea-detailed-outline-fauzidea.png" : "https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/128/40C057/external-login-online-learning-fauzidea-detailed-outline-fauzidea.png"}
                     alt="profile-img"
                     className="profile-img-card"
                 />

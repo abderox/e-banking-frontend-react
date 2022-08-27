@@ -9,6 +9,7 @@ import {
   Route,
 } from "react-router-dom";
 import App from './App';
+import Navbar from './common/containers/NavBar';
 import  Login  from './pages/LoginPage/containers/LoginAdminContainer';
 
 
@@ -20,8 +21,7 @@ root.render(
   <Routes>
     <Route path="/" element={<App />}>
       <Route path="login" element={<Login />}/>
-      <Route path="admin-board" element={<App />}/>
-
+      <Route path="admin-board" element={<Navbar />}/>
     </Route>
   </Routes>
     </Provider>

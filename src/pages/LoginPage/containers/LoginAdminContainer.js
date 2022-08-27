@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router';
 import { login } from "../../../store/actions/auth";
+import { apiMessage } from "../../../store/actions";
 import * as ct from '../../../utils/constants';
 import Toasts from '../../../common/components/toast';
 import ToastError from '../../../common/components/toastError';
@@ -34,6 +35,9 @@ const Login = (props) => {
         place: "toast-position"
     }
 
+    
+    
+
 
     const updateTime = () => {
         return moment().format('LTS')
@@ -48,15 +52,17 @@ const Login = (props) => {
         );
     }, []);
 
+    useEffect(() => {
+        if (props.isLoggedIn) {
+            navigate("/admin-board");
+            props.clearMessage();
+        }
+    } , [props.isLoggedIn]);
 
-
-    if (props.isLoggedIn) {
-        return navigate("/admin-board");
-    }
-
+   
     return (
 
-        <div className="col-md-12 border-up">
+        <div className="col-md-12 border-up ">
 
             <Toasts props={toast} date={dateToFormat} />
             <Toasts props={toastInfo} date={dateToFormat} />
@@ -79,7 +85,8 @@ const mapToProps = (state) => {
 
 const mapToDispatch = (dispatch) => {
     return {
-        signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_ADMIN))
+        signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_ADMIN)),
+        clearMessage : ()=> dispatch(apiMessage.clearMessage())
     }
 }
 

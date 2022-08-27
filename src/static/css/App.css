@@ -14,7 +14,7 @@ label {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
-  margin-top: 10%;
+  margin-top: 14%;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -50,7 +50,7 @@ label {
 }
 
 .button-login:hover {
-  background: #f9a825;
+  background: #fc9957;
   opacity: 0.9;
 }
 
@@ -89,6 +89,26 @@ label {
   border-top: 1px solid rgba(209, 172, 5, 0.384) !important;
 }
 
+
+@media screen and (max-width: 768px) {
+
+  .card-container.card {
+    border-top:  4px solid #21fd21 ;
+  }
+  .button-login:hover {
+    background: #3db83d;
+    opacity: 0.9;
+  }
+  .button-login {
+    background: #16b416;
+    opacity: 0.9;
+  }
+}
 /* #push-label-right{
   margin-left: 10px !important;
 } */
+
+.more-high {
+  top : 27% !important;
+  margin-top: 100px !important;
+}

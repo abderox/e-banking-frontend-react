@@ -1,5 +1,5 @@
 import Toast from 'react-bootstrap/Toast';
-import React , {useState} from 'react'
+import React , {useState,useEffect} from 'react'
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import Moment from 'react-moment';
 import 'moment-timezone';
@@ -7,9 +7,18 @@ import 'moment-timezone';
 function ToastError({ props, dateToFormat }) {
 
     const [showA, setShowA] = useState(true);
+    const [mQuery, setMQuery] = useState({
+        matches: window.innerWidth > 768 ? true : false,
+      });
+      
+      useEffect(() => {
+        let mediaQuery = window.matchMedia("(min-width: 768px)");
+        mediaQuery.addListener(setMQuery);    
+        return () => mediaQuery.removeListener(setMQuery);
+      }, []);
         
     return (
-        <ToastContainer className="p-3" position={props.position}>
+        <ToastContainer className="p-3" position={mQuery && mQuery.matches ? props.position: "top-center" }>
      
             <Toast onClose={()=>(setShowA(!showA))} show={showA} >
                 <Toast.Header >
