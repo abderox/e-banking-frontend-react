@@ -18,7 +18,6 @@ const URL = ct.default;
 
 const LoginClient = (props) => {
     let navigate = useNavigate();
-    const type = "admin";
     
     const [dateToFormat, setTime] = useState(moment().format('LTS'));
 

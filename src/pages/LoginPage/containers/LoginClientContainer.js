@@ -70,7 +70,7 @@ const Login = (props) => {
             {props.message && (
                 <ToastError props={JSON.parse(props.message)} date={dateToFormat} />
             )}
-            <FormLogin to={"/client-bord"} />
+            <FormLogin to={"/client-board"} />
         </div>
     );
 };

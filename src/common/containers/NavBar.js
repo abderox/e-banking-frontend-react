@@ -3,10 +3,12 @@
  */
 
 import React from 'react';
-import { useState } from "react"
+import { useState , useRef} from "react"
 import { useNavigate } from 'react-router';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import Overlay from 'react-bootstrap/Overlay';
+import Tooltip from 'react-bootstrap/Tooltip';
 import "../../static/css/Navbar.css"
 import { logout } from "../../store/actions/auth";
 
@@ -16,7 +18,8 @@ import { logout } from "../../store/actions/auth";
 export function Navbar(props) {
     const [isNavExpanded, setIsNavExpanded] = useState(false)
     const navigate = useNavigate();
-
+    const [show, setShow] = useState(false);
+    const target = useRef(null);
 
     const logOut = () => {
         props.logout();
@@ -46,27 +49,36 @@ export function Navbar(props) {
                 <ul>
                     {props.currentUser ? (
                         <>
-                   <li >
-                   <Link to={"/login"} className="">
-                    <a> {props.currentUser.emailUser} </a>
-                   </Link>
-                  </li>
-                  <li className="nav-item" onClick={logOut}>
-                     <a >Logout</a>
-                 </li> 
-                  </>
-                    ):(
-                        <>
-                          <li className="nav-item">
-                            <Link to={"/login"} className="nav-link">
-                              Login
-                            </Link>
-                          </li>
-                          
-            
+                            <li >
+                                <Link to={"/profile"} className="nav-item mt-1 pt-2">
+                                    <a> {props.currentUser.emailUser} </a>
+                                </Link>
+                            </li>
+                            <li className="nav-item"  ref={target} onClick={() => setShow(!show)}>
+                                <a href="#" className="logout-button" >
+                                    <img src="https://img.icons8.com/color-glass/48/000000/verified-account.png" />
+                                </a>
+                            </li>
+                            <Overlay target={target.current} show={show} placement="left">
+                                {(props) => (
+                                    <Tooltip id="overlay-example" {...props} onClick={logOut}>
+                                        Click the literally me to log out !
+                                    </Tooltip>
+                                )}
+                            </Overlay>
                         </>
-                      )}
-                   
+                    ) : (
+                        <>
+                            <li className="nav-item">
+                                <Link to={"/login"} className="nav-link">
+                                    Login
+                                </Link>
+                            </li>
+
+
+                        </>
+                    )}
+
                 </ul>
             </div>
         </nav>
