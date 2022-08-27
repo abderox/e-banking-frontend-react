@@ -7,25 +7,25 @@ import { useNavigate } from 'react-router';
 import { login } from "../../../store/actions/auth";
 import AlertDismissibleExample from "../../../common/components/error-alert"
 import * as ct from '../../../utils/constants';
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 const URL = ct.default;
 
 const required = (value) => {
     if (!value) {
         return (
-           
-                <small class ="text-danger ">This field is required !</small>
+
+            <small class="text-danger ">This field is required !</small>
         );
     }
 };
 
 const email = value => {
     if (!isEmail(value)) {
-      return (
-        <small class ="text-danger ">This is not an email format !</small>
-      );
+        return (
+            <small class="text-danger ">This is not an email format !</small>
+        );
     }
-  };
+};
 const Login = (props) => {
     const form = useRef();
     const checkBtn = useRef();
@@ -34,11 +34,6 @@ const Login = (props) => {
     const [loading, setLoading] = useState(false);
     let navigate = useNavigate();
 
-    const { isLoggedIn } = useSelector(state => state.auth);
-
-    const { message } = useSelector(state => state.message);
-
-    const dispatch = useDispatch();
 
     const onChangeUsername = (e) => {
         const username = e.target.value;
@@ -53,12 +48,12 @@ const Login = (props) => {
         e.preventDefault();
         setLoading(true);
         form.current.validateAll();
-        
+
         if (checkBtn.current.context._errors.length === 0) {
-            dispatch(login(username, password,URL.SIGN_IN_URL_ADMIN))
+            props.signing(username, password)
                 .then(() => {
                     navigate("/admin-board");
-                    window.location.reload();
+                    // window.location.reload();
                 })
                 .catch(() => {
                     setLoading(false);
@@ -67,15 +62,15 @@ const Login = (props) => {
             setLoading(false);
         }
     };
-    if (isLoggedIn) {
-        return  navigate("/admin-board");
+    if (props.isLoggedIn) {
+        return navigate("/admin-board");
     }
     return (
-        
+
         <div className="col-md-12">
-              {message && (
-                        <AlertDismissibleExample props={JSON.parse(message)}/>
-                    )}
+            {props.message && (
+                <AlertDismissibleExample props={JSON.parse(props.message)} />
+            )}
             <div className="card card-container">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -92,7 +87,7 @@ const Login = (props) => {
                             value={username}
                             placeholder="Email"
                             onChange={onChangeUsername}
-                            validations={[required,email]}
+                            validations={[required, email]}
                         />
                     </div>
                     <div className="form-group">
@@ -115,14 +110,28 @@ const Login = (props) => {
                             <span>Login</span>
                         </button>
                     </div>
-                    
+
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
             </div>
         </div>
     );
 };
-export default Login;
+
+const mapToProps = (state) => {
+    return {
+        isLoggedIn: state.auth.isLoggedIn,
+        message: state.message.message
+    };
+}
+
+const mapToDispatch = (dispatch) => {
+    return {
+        signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_ADMIN))
+    }
+}
+
+export default connect(mapToProps, mapToDispatch)(Login);
 
 
 

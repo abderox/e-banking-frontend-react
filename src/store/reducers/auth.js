@@ -2,26 +2,26 @@ import * as type from '../actions/actionTypes';
 
 const user = JSON.parse(localStorage.getItem('adria-user'));
 const initialState = user ?
-{isAuthenticated: true,user} : {isAuthenticated: false,user:null};
+{isLoggedIn: true,user} : {isLoggedIn: false,user:null};
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case type.LOGIN_SUCCESS:
             return {
                 ...state,
-                isAuthenticated: true,
+                isLoggedIn: true,
                 user: action.payload
             }
         case type.LOGOUT:
             return {
                 ...state,
-                isAuthenticated: false,
+                isLoggedIn: false,
                 user: null
             }
         case type.LOGIN_FAIL:
             return {
                 ...state,
-                isAuthenticated: false,
+                isLoggedIn: false,
                 user: null
             }
         default:

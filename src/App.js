@@ -1,18 +1,21 @@
 import './static/css/App.css';
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useSelector, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { logout } from "./store/actions/auth";
 import {Link } from 'react-router-dom';
 import { Outlet } from "react-router-dom";
+import { useNavigate } from 'react-router';
 
-function App() {
 
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+function App(props) {
+
+  const navigate = useNavigate();
+
 
   const logOut = () => {
-    dispatch(logout());
+    props.logout();
+    navigate("/login");
     
   };
 
@@ -23,19 +26,15 @@ function App() {
           <li className="navbar-brand list-unstyled">
             BankBeta
           </li>
-          {currentUser ? (
+          {props.currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
-                  {currentUser.emailUser}
+                  {props.currentUser.emailUser}
                 </Link>
               </li>
-              <li className="nav-item">
-            
-                <Link to={"/login"} className="nav-link" onClick={logOut}>
-                  Log out
-                </Link>
-               
+              <li className="nav-item" onClick={logOut}>
+                  <button className="btn btn-danger">Logout</button>
               </li>
             </div>
           ) : (
@@ -57,4 +56,16 @@ function App() {
   );
 }
 
-export default App;
+const mapToStateProps = (state) => {
+  return {
+    currentUser: state.auth.user,
+  };
+}
+
+const mapToDispatchProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+  };
+}
+
+export default connect(mapToStateProps, mapToDispatchProps)(App);
