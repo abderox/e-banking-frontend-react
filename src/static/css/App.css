@@ -1,35 +1,38 @@
 label {
   display: block;
   margin-top: 10px;
+  margin-bottom: 5px;
 }
 .card-container.card {
   max-width: 350px !important;
+  border-top: 4px solid #fd7921;
   padding: 40px 40px;
 }
 .card {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
-  margin-top: 50px;
+  margin-top: 10%;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: #f9a8255d 0px 48px 100px 0px;
+  -webkit-box-shadow: #f9a8258c 0px 48px 100px 0px;
+  box-shadow: #f9a82538 0px 48px 100px 0px;
 }
 .profile-img-card {
-  width: 96px;
-  height: 96px;
+  width: 128px !important;
+  height: 128px !important;
   margin: 0 auto 10px;
   display: block;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-  border-radius: 50%;
+  border-radius: 5%;
+  margin-bottom: 10px;
 }
 
 .button-login {
-  margin-top: 10px;
+  margin-top: 20px;
   background: #fd7921;
   border: none;
   padding: 10px;
@@ -49,4 +52,16 @@ label {
 
 .error-label {
   height: 30px;
+}
+
+#username{
+  /* border : none; */
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  outline: #fd7921 !important;
+}
+
+.form-control:focus {
+  border-color: #fd7921 !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important;
 }

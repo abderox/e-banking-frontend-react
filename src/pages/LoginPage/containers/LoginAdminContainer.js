@@ -2,11 +2,14 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef ,useEffect} from "react";
 import { useNavigate } from 'react-router';
 import { login } from "../../../store/actions/auth";
 import AlertDismissibleExample from "../../../common/components/error-alert"
 import * as ct from '../../../utils/constants';
+import Toasts from '../../../common/components/toast';
+import ToastError from '../../../common/components/toastError';
+import moment from 'moment';
 import { connect } from "react-redux";
 const URL = ct.default;
 
@@ -32,13 +35,32 @@ const Login = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const toast = {
+        title : "Disclaimer",
+        body : "Please make sure to log out after you get done",
+        position : "top-center"
+    }
     let navigate = useNavigate();
+    const [dateToFormat, setdateToFormat] = useState(moment().format('LTS'));
 
+    const updateTime = () => {
+      let clock = moment().format('LTS')
+    }
+    setInterval(updateTime, 1000)
+  
+    useEffect(() => {
+      let time = updateTime;
+      setdateToFormat(
+        time
+      );
+    },[]);
 
+   
     const onChangeUsername = (e) => {
         const username = e.target.value;
         setUsername(username);
     };
+
     const onChangePassword = (e) => {
         const password = e.target.value;
         setPassword(password);
@@ -67,13 +89,15 @@ const Login = (props) => {
     }
     return (
 
-        <div className="col-md-12">
+        <div className="col-md-12 border-up">
+
+            <Toasts props={toast} date={dateToFormat}  />
             {props.message && (
-                <AlertDismissibleExample props={JSON.parse(props.message)} />
+                <ToastError props={JSON.parse(props.message)}  date={dateToFormat} />
             )}
-            <div className="card card-container">
+            <div className="card card-container ">
                 <img
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                    src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/128/FD7E14/external-login-online-learning-fauzidea-detailed-outline-fauzidea.png"
                     alt="profile-img"
                     className="profile-img-card"
                 />
@@ -81,6 +105,7 @@ const Login = (props) => {
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <Input
+                            id="username"
                             type="text"
                             className="form-control"
                             name="username"
