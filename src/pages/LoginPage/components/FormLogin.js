@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import  { useState, useRef , useEffect } from "react";
+import  { useState, useRef , useEffect  } from "react";
 import { useNavigate } from 'react-router';
 import { connect } from "react-redux";
 import { email, required } from '../../../utils/constraints';
@@ -9,6 +9,7 @@ import InputText from '../components/inputText';
 import ButtonLogin from '../components/buttonLogin';
 import { login } from "../../../store/actions/auth";
 import * as ct from '../../../utils/constants';
+import PopoverPositioned from '../../../common/components/popover';
 const URL = ct.default;
 
 
@@ -21,6 +22,7 @@ function FormLogin(props) {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
+    const [hidden, setHidden] = useState(true);
     const [mQuery, setMQuery] = useState({
         matches: window.innerWidth > 768 ? true : false,
       });
@@ -30,6 +32,12 @@ function FormLogin(props) {
         mediaQuery.addListener(setMQuery);    
         return () => mediaQuery.removeListener(setMQuery);
       }, []);
+
+      useEffect(()=>{
+        if(window.location.pathname.includes('admin')){
+            setHidden(false);
+        }
+      },[window.location.pathname]);
     
     const userNameInput = {
         placeholder : "Email",
@@ -68,7 +76,7 @@ function FormLogin(props) {
         if (checkBtn.current.context._errors.length === 0) {
             props.signing(username, password)
                 .then(() => {
-                    navigate("/admin-board");
+                    navigate(props.url);
                     // window.location.reload();
                 })
                 .catch(() => {
@@ -91,17 +99,27 @@ function FormLogin(props) {
                     <InputText props={userNameInput} handleChange={onChangeUsername} value={username} />
                     <InputText props={passwordInput} handleChange={onChangePassword} value={password} />
                     <ButtonLogin loading={loading}/>
-
+                    {hidden && 
+                    <PopoverPositioned name={"If you are a banker or an admin go here !"} url={"/login-admin"}/>
+                    }
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
+
                 </Form>
             </div>
   )
 }
 
+
+
+const mapToProps = (state,ownedProps) => {
+    return {
+        url : ownedProps.to
+    }
+}
 const mapToDispatch = (dispatch) => {
     return {
         signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_ADMIN))
     }
 }
 
-export default connect(null, mapToDispatch)(FormLogin);
+export default connect(mapToProps, mapToDispatch)(FormLogin);

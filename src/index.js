@@ -11,6 +11,8 @@ import {
 import App from './App';
 import Navbar from './common/containers/NavBar';
 import  Login  from './pages/LoginPage/containers/LoginAdminContainer';
+import  LoginClient  from './pages/LoginPage/containers/LoginClientContainer';
+
 
 
 
@@ -20,8 +22,10 @@ root.render(
   <Provider store={store}>
   <Routes>
     <Route path="/" element={<App />}>
-      <Route path="login" element={<Login />}/>
+      <Route path="login-admin" element={<Login />}/>
       <Route path="admin-board" element={<Navbar />}/>
+      <Route path="login" element={<LoginClient />}/>
+      <Route path="client-board" element={<Navbar />}/>
     </Route>
   </Routes>
     </Provider>

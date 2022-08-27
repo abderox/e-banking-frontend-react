@@ -12,26 +12,26 @@ import ToastError from '../../../common/components/toastError';
 import moment from 'moment';
 import { connect } from "react-redux";
 import FormLogin from "../components/FormLogin";
+import PopoverPositioned from "../../../common/components/popover";
 
 const URL = ct.default;
 
 
-const LoginClient = (props) => {
+const Login = (props) => {
     let navigate = useNavigate();
-    const type = "admin";
     
     const [dateToFormat, setTime] = useState(moment().format('LTS'));
 
-    const toastInfo = {
-        title: "Disclaimer",
-        body: "Please make sure to log out whenever you get done .",
+    const toast = {
+        title: "Hello there !",
+        body: "You are welcome to Beta-Bank test web application.",
         position: "top-center",
         place: "toast-position-2"
     }
 
-    const toast = {
-        title: "Howdy admin !",
-        body: "Friendly reminder : The session lasts for 1 hour each time you log in.",
+    const toastInfo = {
+        title: "Reminder",
+        body: "The session lasts for 1 hour each time you log in.",
         position: "top-center",
         place: "toast-position"
     }
@@ -55,7 +55,7 @@ const LoginClient = (props) => {
 
     useEffect(() => {
         if (props.isLoggedIn) {
-            navigate("/admin-board");
+            navigate("/client-board");
             props.clearMessage();
         }
     } , [props.isLoggedIn]);
@@ -71,7 +71,7 @@ const LoginClient = (props) => {
             {props.message && (
                 <ToastError props={JSON.parse(props.message)} date={dateToFormat} />
             )}
-            <FormLogin to={"/admin-board"} />
+            <FormLogin to={"/client-bord"} />
         </div>
     );
 };
@@ -86,12 +86,12 @@ const mapToProps = (state) => {
 
 const mapToDispatch = (dispatch) => {
     return {
-        signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_CLIENT)),
+        signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_ADMIN)),
         clearMessage : ()=> dispatch(apiMessage.clearMessage())
     }
 }
 
-export default connect(mapToProps, mapToDispatch)(LoginClient);
+export default connect(mapToProps, mapToDispatch)(Login);
 
 
 
