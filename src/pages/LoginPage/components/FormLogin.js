@@ -22,7 +22,6 @@ function FormLogin(props) {
     const [username, setUsername] = useState("");
     const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState("")
-    const [passwordAgain, setPasswordAgain] = useState("")
     const [hidden, setHidden] = useState(true);
     const [mQuery, setMQuery] = useState({
         matches: window.innerWidth > 768 ? true : false,

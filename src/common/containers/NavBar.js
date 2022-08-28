@@ -3,12 +3,13 @@
  */
 
 import React from 'react';
-import { useState , useRef} from "react"
+import { useState, useRef } from "react"
 import { useNavigate } from 'react-router';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
+import Switchtoggle from '../components/switch-toggle'
 import "../../static/css/Navbar.css"
 import { logout } from "../../store/actions/auth";
 
@@ -51,12 +52,12 @@ export function Navbar(props) {
                         <>
                             <li >
                                 <Link to={"/profile"} className="nav-item mt-1 pt-2">
-                                    <a> {props.currentUser.emailUser} </a>
+                                    <a href="#"> {props.currentUser.emailUser} </a>
                                 </Link>
                             </li>
-                            <li className="nav-item"  ref={target} onClick={() => setShow(!show)}>
+                            <li className="nav-item" ref={target} onClick={() => setShow(!show)}>
                                 <a href="#" className="logout-button" >
-                                    <img src="https://img.icons8.com/color-glass/48/000000/verified-account.png" />
+                                    <img src="https://img.icons8.com/color-glass/48/000000/verified-account.png" alt="connected" />
                                 </a>
                             </li>
                             <Overlay target={target.current} show={show} placement="left">
@@ -75,6 +76,9 @@ export function Navbar(props) {
                                 </Link>
                             </li>
 
+                            <li>
+                                <Switchtoggle />
+                            </li>
 
                         </>
                     )}

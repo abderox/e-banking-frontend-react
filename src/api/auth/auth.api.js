@@ -28,10 +28,15 @@ const login = (email, password, url) => {
 const logout = () => {
 
     axios.get(URL.API_URL_V2 + URL.SIGN_OUT_URL_ADMIN, authHeader()).then(response => {
-        if (response.status>=400 || response.status === 200) {
+        if ( response.status === 200 ) {
             localStorage.removeItem("adria-user");
         }
-    });
+       
+    }).catch(error => {
+        if(error.toString().includes("401") || error.toString().includes("403")){
+            localStorage.removeItem("adria-user");
+        }
+        });
 };
 
 export default {

@@ -8,6 +8,7 @@ label {
   max-width: 400px !important;
   border-top: 4px solid #fd7921;
   padding: 40px 40px;
+ 
 }
 
 .card {
@@ -21,6 +22,7 @@ label {
   -moz-box-shadow: #f9a8255d 0px 48px 100px 0px;
   -webkit-box-shadow: #f9a8258c 0px 48px 100px 0px;
   box-shadow: #f9a82538 0px 48px 100px 0px;
+  
 }
 
 .profile-img-card {
@@ -77,14 +79,15 @@ label {
 
 #toast-position-2 {
   top: 30px !important;
- 
+
 }
 
 .toast {
-  background: rgba(255,255,255,0.4); /* translucent white */
+  background: rgba(255, 255, 255, 0.4);
+  /* translucent white */
   backdrop-filter: blur(10px);
-  border-right:none !important;
-  border-left:none !important;
+  border-right: none !important;
+  border-left: none !important;
   border-bottom: 3px solid rgb(209, 172, 5) !important;
   border-top: 1px solid rgba(209, 172, 5, 0.384) !important;
 }
@@ -93,27 +96,30 @@ label {
 @media screen and (max-width: 768px) {
 
   .card-container.card {
-    border-top:  4px solid #21fd21 ;
+    border-top: 4px solid #21fd21;
   }
+
   .button-login:hover {
     background: #3db83d;
     opacity: 0.9;
   }
+
   .button-login {
     background: #16b416;
     opacity: 0.9;
   }
 }
+
 /* #push-label-right{
   margin-left: 10px !important;
 } */
 
 .more-high {
-  top : 27% !important;
+  top: 27% !important;
   margin-top: 100px !important;
 }
 
-.password-check{
+.password-check {
   font-size: 10px;
 }
 
