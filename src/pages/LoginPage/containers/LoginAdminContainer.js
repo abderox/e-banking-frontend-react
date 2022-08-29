@@ -73,7 +73,7 @@ const LoginClient = (props) => {
             {/* {props.message && (
                 <ToastError props={JSON.parse(props.message)} date={dateToFormat} />
             )} */}
-            <FormLogin to={"/admin-board"} url={URL.SIGN_IN_URL_ADMIN} showMsg={false} />
+            <FormLogin to={"/admin-board/clients-operations"} url={URL.SIGN_IN_URL_ADMIN} showMsg={false} />
         </div>
     );
 };

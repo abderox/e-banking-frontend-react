@@ -71,9 +71,7 @@ function FormLogin(props) {
         if (checkBtn.current.context._errors.length === 0) {
             props.signing(username, password, props.loginUrl)
                 .then(() => {
-                    setTimeout(() => {
                         navigate(props.url)
-                    }, 2000);
                 })
                 .catch(() => {
                     setLoading(false);

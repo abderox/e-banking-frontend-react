@@ -43,7 +43,7 @@ function VHmenu() {
                   <Nav.Link href="#">
                     <Link to={"/admin-board/clients-operations"} className="text-decoration-none text-secondary">Clients</Link>
                   </Nav.Link>
-                  <Nav.Link href="#action2">Link</Nav.Link>
+                  <Nav.Link href="#">Link</Nav.Link>
                  
                 </Nav>
               

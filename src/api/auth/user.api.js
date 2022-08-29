@@ -19,4 +19,8 @@ const getAdminBoard = () => {
   return axios.get(URL.API_URL_V2 + "", { headers: authHeader() });
 };
 
+const registerClient = (data) => {
+  return axios.post(URL.API_URL_V2 + "", { headers: authHeader() ,data});
+};
+
 export default {getAdminBoard, getPublicContent, getUserBoard};

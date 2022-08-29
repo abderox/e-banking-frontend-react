@@ -2,19 +2,19 @@ import React from 'react'
 import Table from 'react-bootstrap/Table';
 
 
-function TableC({ tableData }) {
+function TableC({ tableData , tableHead}) {
     return (
 
 
         <div className="pt-4 mt-2 bg-color-div">
         <Table striped bordered hover>
             <thead>
-                <tr>
-                    <th>S.N</th>
-                    <th>Full Name</th>
-                    <th>Email Address</th>
-                    <th>Salary</th>
-                </tr>
+                <th>N°</th>
+            {tableHead.map((value,index)=>
+            {
+                return (<th key={index}>{value}</th>)
+            }
+            )}
             </thead>
             <tbody>
                 {
@@ -22,9 +22,12 @@ function TableC({ tableData }) {
                         return (
                             <tr key={index}>
                                 <td>{index + 1}</td>
-                                <td>{data.fullName}</td>
-                                <td>{data.emailAddress}</td>
-                                <td>{data.salary}</td>
+                                <td>{data.email}</td>
+                                <td>{data.telephone}</td>
+                                <td>{data.typepiece}</td>
+                                <td>{data.numPieceIdentiteClient}</td>
+                                <td>{data.provincAddress}</td>
+                                <td>{data.rue}</td>
                             </tr>
                         )
                     })

@@ -31,7 +31,7 @@ export function Navbar(props) {
         <nav className={`navigation  ${props.isdarkMode ? "" : "dark-nav"} `}>
             <Link to={"/"} className={`brand-name ${props.isdarkMode ? "" : "dark-brand"}`}>
                 <img src="https://img.icons8.com/color/48/000000/bank.png" alt="brand" />
-                β-Bank
+                β-{props.currentUser ? props.currentUser.bankName : "Bank"}
             </Link>
             <button
                 className="hamburger"
