@@ -12,6 +12,7 @@ import App from './App';
 import  Login  from './pages/LoginPage/containers/LoginAdminContainer';
 import  LoginClient  from './pages/LoginPage/containers/LoginClientContainer';
 import ClientBoardContainer from './pages/ClientBoard/containers/ClientBoardContainer';
+import ClientBoardContainer2 from './pages/ClientBoard/containers/ClientBoardContainer2';
 import AdminBoardContainer from './pages/AdminBoard/containers/AdminBoardContainer';
 import Error404 from './common/containers/404';
 
@@ -26,6 +27,7 @@ root.render(
       <Route path="admin-board" element={<AdminBoardContainer />}/>
       <Route path="login" element={<LoginClient />}/>
       <Route path="client-board" element={<ClientBoardContainer />}/>
+      <Route path="profile" element={<ClientBoardContainer2 />}/>
     </Route>
     <Route path="*" element={<Error404 />} />
   </Routes>

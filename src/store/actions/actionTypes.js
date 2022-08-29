@@ -6,3 +6,4 @@ export const LOGOUT = "LOGOUT";
 export const SET_MESSAGE = "SET_MESSAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 export const DARK_MODE = "DARK_MODE";
+export const MISSING_DATA = "MISSING_DATA";

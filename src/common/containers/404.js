@@ -1,8 +1,9 @@
 import React from 'react'
 import "../../static/css/Error404.css"
-
+import {useNavigate} from "react-router";
 
 const Error404 = () => {
+    let navigate = useNavigate();
     return (
         <>
             <div className="error-div">
@@ -95,11 +96,11 @@ const Error404 = () => {
             </defs>
             </svg>
     </div>
-    <div  className="error-div text">
+    <div  className="error-div text-text">
         <h1 className="error-title-h1">404 Error</h1>  
       <h2>Couldn't launch :(</h2>
          <h3>Page Not Found - lets take you Back </h3>
-            <button className="btn btn-dark" onClick={() => window.history.back()}>Go Back</button> 
+            <button className="btn btn-dark" onClick={() => navigate(-1)}>Go Back</button> 
     </div>
     </>
     )

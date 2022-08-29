@@ -15,7 +15,8 @@ const Switchtoggle = (props) => {
     };
     useEffect(() => {
 
-        document.body.style.backgroundColor = props.isdarkMode ? "#fff" : "#292c35";
+        document.body.style.backgroundColor = props.isdarkMode ? "#fff" : "#121212";
+        document.body.style.color = props.isdarkMode ? "black" : "#fff";
 
     }, [props.isdarkMode]);
 

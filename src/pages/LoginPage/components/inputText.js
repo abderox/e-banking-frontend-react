@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from "react-validation/build/input";
 
-function InputText({ props ,handleChange , value , email , required}) {
+function InputText({ props ,handleChange , value ,isDarkMode}) {
     return (
         <div className={props.position}>
 
@@ -17,7 +17,7 @@ function InputText({ props ,handleChange , value , email , required}) {
                     <Input
                         id={props.placeholder}
                         type={props.type}
-                        className="form-control"
+                        className={`form-control ${isDarkMode ? "" : "form-control-dark"} `}
                         name={props.placeholder}
                         value={value}
                         placeholder={props.placeholder}

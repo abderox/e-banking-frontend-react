@@ -15,7 +15,6 @@ import { logout } from "../../store/actions/auth";
 
 
 
-
 export function Navbar(props) {
     const [isNavExpanded, setIsNavExpanded] = useState(false)
     const navigate = useNavigate();
@@ -29,11 +28,11 @@ export function Navbar(props) {
     };
 
     return (
-        <nav className="navigation">
-            <a href="/" className="brand-name">
+        <nav className={`navigation  ${props.isdarkMode ? "" : "dark-nav"} `}>
+            <Link to={"/"} className={`brand-name ${props.isdarkMode ? "" : "dark-brand"}`}>
                 <img src="https://img.icons8.com/color/48/000000/bank.png" alt="brand" />
                 β-Bank
-            </a>
+            </Link>
             <button
                 className="hamburger"
                 onClick={() => {
@@ -51,27 +50,30 @@ export function Navbar(props) {
                     {props.currentUser ? (
                         <>
                             <li >
-                                <Link to={"/profile"} className="nav-item mt-1 pt-2">
-                                    <a href="#"> {props.currentUser.emailUser} </a>
+                                <Link to={"/profile"} className="nav-item mt-1 pt-2 link-nav">
+                                    {props.currentUser.username}
                                 </Link>
                             </li>
-                            <li className="nav-item" ref={target} onClick={() => setShow(!show)}>
-                                <a href="#" className="logout-button" >
-                                    <img src="https://img.icons8.com/color-glass/48/000000/verified-account.png" alt="connected" />
-                                </a>
+                            <li className="nav-item " ref={target} onClick={() => setShow(!show)}>
+                                <button className="logout-button " >
+                                    <img src="https://img.icons8.com/color-glass/48/000000/verified-account.png" alt="connected" className="img-logout" />
+                                </button>
                             </li>
-                            <Overlay target={target.current} show={show} placement="left">
+                            <Overlay target={target.current} show={show} placement="bottom">
                                 {(props) => (
                                     <Tooltip id="overlay-example" {...props} onClick={logOut}>
                                         Click the literally me to log out !
                                     </Tooltip>
                                 )}
                             </Overlay>
+                            <li className="mt-3 mr-2">
+                                <Switchtoggle />
+                            </li>
                         </>
                     ) : (
                         <>
                             <li className="nav-item">
-                                <Link to={"/login"} className="nav-link">
+                                <Link to={"/login"} className="nav-link link-nav mt-1">
                                     Login
                                 </Link>
                             </li>
@@ -92,6 +94,7 @@ export function Navbar(props) {
 const mapToStateProps = (state) => {
     return {
         currentUser: state.auth.user,
+        isdarkMode: state.darkMode.isdarkMode
     };
 }
 

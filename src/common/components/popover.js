@@ -2,15 +2,18 @@ import React, { useState, useRef } from 'react';
 import Overlay from 'react-bootstrap/Overlay';
 import Popover from 'react-bootstrap/Popover';
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import { apiMessage } from "../../store/actions";
 
 
-function PopoverPositioned({ name, url }) {
+function PopoverPositioned(props) {
 
     const [show, setShow] = useState(false);
     const [target, setTarget] = useState(null);
     const ref = useRef(null);
 
     const handleClick = (event) => {
+        props.clearMessage()
         setShow(!show);
         setTarget(event.target);
     };
@@ -18,7 +21,7 @@ function PopoverPositioned({ name, url }) {
 
 
         <div ref={ref} className="justify-content-center d-flex mt-4">
-            <a href="#" onClick={handleClick} className="text-decoration-none"><small>{name}</small></a>
+            <p  onClick={handleClick} className="anchor-link "><small>{props.name}</small></p>
            
             <Overlay
                 show={show}
@@ -31,7 +34,7 @@ function PopoverPositioned({ name, url }) {
                     <Popover.Header as="h3">If not a customer go here !</Popover.Header>
                     <Popover.Body>
                   
-                    <Link to={url} className=" text-decoration-none text-center text-bg-warning">
+                    <Link to={props.url} className=" text-decoration-none text-center text-bg-warning">
                               Login-admin
                     </Link>
                     
@@ -45,4 +48,17 @@ function PopoverPositioned({ name, url }) {
     );
 }
 
-export default PopoverPositioned;
+const mapStateToProps = (state,ownedProps) => {
+    return {
+        url: ownedProps.url,
+        name : ownedProps.name,
+    }}
+
+const mapToDispatch = (dispatch) => {
+    return {
+        clearMessage: () => dispatch(apiMessage.clearMessage())
+    }
+}
+
+
+export default connect(mapStateToProps, mapToDispatch)(PopoverPositioned);

@@ -36,6 +36,13 @@
     border: 0.5px solid rgba(206, 82, 0, 0.089);
    
   }
+
+  @media screen and (max-width: 768px) {
+    #darkmode .label {
+      margin: 1rem 0 1rem 0;
+    }
+  
+}
   
   #darkmode .checkbox:checked + .label .ball{
     transform: translate(18px,-0.5px)

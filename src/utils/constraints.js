@@ -9,7 +9,7 @@ const required = (value) => {
     if (!value) {
         return (
 
-            <small class="text-danger ">This field is required !</small>
+            <small className="text-danger ">This field is required !</small>
         );
     }
 };
@@ -17,7 +17,7 @@ const required = (value) => {
 const email = value => {
     if (!isEmail(value)) {
         return (
-            <small class="text-danger ">This is not an email format !</small>
+            <small className="text-danger ">This is not an email format !</small>
         );
     }
 };

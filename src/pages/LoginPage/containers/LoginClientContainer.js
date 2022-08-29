@@ -4,7 +4,6 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router';
-import { login } from "../../../store/actions/auth";
 import { apiMessage } from "../../../store/actions";
 import * as ct from '../../../utils/constants';
 import Toasts from '../../../common/components/toast';
@@ -70,7 +69,7 @@ const Login = (props) => {
             {props.message && (
                 <ToastError props={JSON.parse(props.message)} date={dateToFormat} />
             )}
-            <FormLogin to={"/client-board"} />
+            <FormLogin to={"/client-board"} url={URL.SIGN_IN_URL_CLIENT} showMsg={true} />
         </div>
     );
 };
@@ -85,7 +84,6 @@ const mapToProps = (state) => {
 
 const mapToDispatch = (dispatch) => {
     return {
-        signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_ADMIN)),
         clearMessage : ()=> dispatch(apiMessage.clearMessage())
     }
 }

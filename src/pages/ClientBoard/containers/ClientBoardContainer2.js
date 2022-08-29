@@ -1,24 +1,21 @@
-import React,{useEffect} from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import { connect } from "react-redux";
-import {reload} from "../../../store/actions/auth"
-import {Link} from "react-router-dom";
-const ClientBoardContainer = (props) => {
+
+
+
+const ClientBoardContainer2 = (props) => {
 
   let navigate = useNavigate();
-  
-  
+
   if (!props.currentUser) {
     navigate("/login");
   }
 
 
 
-return (
+  return (
 
-    <div className="container">
-   
-      
     <div className="container">
       <header className="jumbotron">
         <h3>
@@ -50,28 +47,19 @@ return (
         {props.currentUser.identifiantClient}
 
       </p>
-      <Link to={"/profile"}>
-        <button className="btn btn-primary">Profile</button>
-      </Link>
+      
 
-      </div>
     </div>
 
-  )}
+  )
+}
 
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.auth.user,
-    isLoggedIn : state.auth.isLoggedIn
-  }
-}
-
-const mapToDispatch = (dispatch) => {
-  return {
-    reloadData :()=> dispatch(reload())
+    currentUser: state.auth.user
   }
 }
 
 
-export default connect(mapStateToProps)(ClientBoardContainer);
+export default connect(mapStateToProps)(ClientBoardContainer2);

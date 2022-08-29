@@ -4,7 +4,6 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router';
-import { login } from "../../../store/actions/auth";
 import { apiMessage } from "../../../store/actions";
 import * as ct from '../../../utils/constants';
 import Toasts from '../../../common/components/toast';
@@ -12,6 +11,8 @@ import ToastError from '../../../common/components/toastError';
 import moment from 'moment';
 import { connect } from "react-redux";
 import FormLogin from "../components/FormLogin";
+import { login } from "../../../store/actions/auth";
+
 
 const URL = ct.default;
 
@@ -64,13 +65,15 @@ const LoginClient = (props) => {
 
         <div className="col-md-12 border-up ">
 
-            <Toasts props={toast} date={dateToFormat} />
-            <Toasts props={toastInfo} date={dateToFormat} />
+            {props.message ? <ToastError props={JSON.parse(props.message)} date={dateToFormat} isdarkMode={props.isdarkMode}/> :
+             <> <Toasts props={toast} date={dateToFormat} isdarkMode={props.isdarkMode} />
+            <Toasts props={toastInfo} date={dateToFormat} isdarkMode={props.isdarkMode} /> </> }
+          
 
-            {props.message && (
+            {/* {props.message && (
                 <ToastError props={JSON.parse(props.message)} date={dateToFormat} />
-            )}
-            <FormLogin to={"/admin-board"} />
+            )} */}
+            <FormLogin to={"/admin-board"} url={URL.SIGN_IN_URL_ADMIN} showMsg={false} />
         </div>
     );
 };
@@ -79,14 +82,15 @@ const LoginClient = (props) => {
 const mapToProps = (state) => {
     return {
         isLoggedIn: state.auth.isLoggedIn,
-        message: state.message.message
+        message: state.message.message,
+        isdarkMode: state.darkMode.isdarkMode
     };
 }
 
 const mapToDispatch = (dispatch) => {
     return {
-        signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_CLIENT)),
-        clearMessage : ()=> dispatch(apiMessage.clearMessage())
+        clearMessage : ()=> dispatch(apiMessage.clearMessage()),
+        signing : (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_ADMIN))
     }
 }
 

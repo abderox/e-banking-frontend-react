@@ -1,9 +1,9 @@
 import React from 'react'
 
-function ButtonLogin({loading}) {
+function ButtonLogin({loading,isdarkMode}) {
     return (
         <div className="form-group d-flex justify-content-center mt-3">
-            <button className="button-login" disabled={loading}>
+            <button className={`button-login ${isdarkMode ? "" : " darkbutton-login"}`} disabled={loading}>
                 {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                 )}

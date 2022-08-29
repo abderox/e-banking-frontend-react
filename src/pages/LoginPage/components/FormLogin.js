@@ -9,20 +9,19 @@ import { email, required } from '../../../utils/constraints';
 import InputText from '../components/inputText';
 import ButtonLogin from '../components/buttonLogin';
 import { login } from "../../../store/actions/auth";
-import * as ct from '../../../utils/constants';
 import PopoverPositioned from '../../../common/components/popover';
-const URL = ct.default;
+
 
 
 function FormLogin(props) {
 
-    let navigate = useNavigate();
+
     const form = useRef();
+    const navigate = useNavigate();
     const checkBtn = useRef();
     const [username, setUsername] = useState("");
     const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState("")
-    const [hidden, setHidden] = useState(true);
     const [mQuery, setMQuery] = useState({
         matches: window.innerWidth > 768 ? true : false,
     });
@@ -33,11 +32,7 @@ function FormLogin(props) {
         return () => mediaQuery.removeListener(setMQuery);
     }, []);
 
-    useEffect(() => {
-        if (window.location.pathname.includes('admin')) {
-            setHidden(false);
-        }
-    }, [window.location.pathname]);
+
 
     const userNameInput = {
         placeholder: "Email",
@@ -74,10 +69,11 @@ function FormLogin(props) {
         form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
-            props.signing(username, password)
+            props.signing(username, password, props.loginUrl)
                 .then(() => {
-                    navigate(props.url);
-                    // window.location.reload();
+                    setTimeout(() => {
+                        navigate(props.url)
+                    }, 2000);
                 })
                 .catch(() => {
                     setLoading(false);
@@ -88,7 +84,7 @@ function FormLogin(props) {
     };
 
     return (
-        <div className={`card card-container ${mQuery && mQuery.matches ? "" : "more-high"}`}>
+        <div className={`card card-container ${mQuery && mQuery.matches ? "" : "more-high "} ${props.isdarkMode ? "" : "dark-form-login"}`}>
             <img
                 src={mQuery && mQuery.matches ? "https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/128/FD7E14/external-login-online-learning-fauzidea-detailed-outline-fauzidea.png" : "https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/128/40C057/external-login-online-learning-fauzidea-detailed-outline-fauzidea.png"}
                 alt="profile-img"
@@ -96,25 +92,25 @@ function FormLogin(props) {
             />
             <Form onSubmit={handleLogin} ref={form}>
 
-                <InputText props={userNameInput} handleChange={onChangeUsername} value={username} />
-                <InputText props={passwordInput} handleChange={onChangePassword} value={password} />
+                <InputText props={userNameInput} handleChange={onChangeUsername} value={username} isDarkMode={props.isdarkMode} />
+                <InputText props={passwordInput} handleChange={onChangePassword} value={password} isDarkMode={props.isdarkMode} />
                 <div className="d-block mt-3 justify-content-center text-center">
-                <small className="text-muted  text-center" >Password health check </small>
-                <PasswordChecklist
-                    className="mt-1 text-opacity-50 text-muted text password-check d-flex justify-content-center"
-                    rules={["minLength", "specialChar", "number", "capital"]}
-                    minLength={8}
-                    value={password}
-                    messages={{
-                        minLength: "having 8 caracteres.",
-                        specialChar: "having special caracteres",
-                        number: "having a number",
-                        capital: "having a capital letter",
-                    }}
-                />
+                    <small className={` ${props.isdarkMode ? "text-muted" : "text-white"} text-center `}>Password health check </small>
+                    <PasswordChecklist
+                        className={` mt-1 text-opacity-50   text password-check d-flex justify-content-center"`}
+                        rules={["minLength", "specialChar", "number", "capital"]}
+                        minLength={8}
+                        value={password}
+                        messages={{
+                            minLength: "having 8 caracteres.",
+                            specialChar: "having special caracteres",
+                            number: "having a number",
+                            capital: "having a capital letter",
+                        }}
+                    />
                 </div>
-                <ButtonLogin loading={loading} />
-                {hidden &&
+                <ButtonLogin loading={loading} isdarkMode={props.isdarkMode} />
+                {props.showMsg &&
                     <PopoverPositioned name={"If you are a banker or an admin go here !"} url={"/login-admin"} />
                 }
                 <CheckButton style={{ display: "none" }} ref={checkBtn} />
@@ -128,12 +124,15 @@ function FormLogin(props) {
 
 const mapToProps = (state, ownedProps) => {
     return {
-        url: ownedProps.to
+        url: ownedProps.to,
+        loginUrl: ownedProps.url,
+        showMsg: ownedProps.showMsg,
+        isdarkMode: state.darkMode.isdarkMode
     }
 }
 const mapToDispatch = (dispatch) => {
     return {
-        signing: (username, password) => dispatch(login(username, password, URL.SIGN_IN_URL_ADMIN))
+        signing: (username, password, url) => dispatch(login(username, password, url))
     }
 }
 

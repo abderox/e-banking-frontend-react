@@ -5,8 +5,9 @@
  const SIGN_IN_URL_ADMIN = "/sign-in-admin";
  const SIGN_OUT_URL_ADMIN = "/auth/sign-out-admin";
  const SIGN_IN_URL_CLIENT = "/sign-in-client";
+ const SIGN_OUT_URL_CLIENT = "/auth/sign-out-client";
 
 export default {
     API_URL_V1, API_URL_V2,
      AUTH_BASE_URL, SIGN_IN_URL_ADMIN,
-      SIGN_OUT_URL_ADMIN, SIGN_IN_URL_CLIENT};
+      SIGN_OUT_URL_ADMIN, SIGN_IN_URL_CLIENT,SIGN_OUT_URL_CLIENT};

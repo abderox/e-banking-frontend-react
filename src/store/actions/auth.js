@@ -6,7 +6,7 @@ import AuthApi from '../../api/auth/auth.api';
     return AuthApi.login(username, password, url).then((response) => {
         dispatch({
             type: type.LOGIN_SUCCESS,
-            payload: { user: response }
+            payload: response
         });
         return Promise.resolve();
     },
@@ -33,4 +33,10 @@ import AuthApi from '../../api/auth/auth.api';
     });
 };
 
-export  {login, logout};
+const reload =
+    () => (dispatch) => {
+        dispatch({
+            type: type.MISSING_DATA,
+        });}
+
+export  {login, logout,reload};

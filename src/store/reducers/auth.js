@@ -28,6 +28,12 @@ export default (state = initialState, action) => {
                 isLoggedIn: false,
                 user: null
             }
+        case type.MISSING_DATA :
+            return {
+                ...state,
+                isLoggedIn:true,
+                user : user,
+            }
         default:
             return state;
     }
