@@ -1,7 +1,6 @@
-import React,{useEffect} from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import { connect } from "react-redux";
-import {reload} from "../../../store/actions/auth"
 import {Link} from "react-router-dom";
 const ClientBoardContainer = (props) => {
 
@@ -27,7 +26,7 @@ return (
       </header>
       <p>
         <strong>Token:</strong>
-        {props.currentUser.accessToken}
+        {props.currentUser.accessToken.substring(0, 60)}...
       </p>
       <p>
         <strong>Email:</strong> {props.currentUser.emailUser}
@@ -67,11 +66,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapToDispatch = (dispatch) => {
-  return {
-    reloadData :()=> dispatch(reload())
-  }
-}
 
 
 export default connect(mapStateToProps)(ClientBoardContainer);

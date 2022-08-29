@@ -230,3 +230,18 @@ perspective: 1000px;
   background: rgba(34, 34, 34, 0.863);
   color: #fd7921;
 }
+
+.bg-color-div{
+  background-color: #f9a8251e;
+}
+
+.borders-div{
+  border-top: 3px solid #ffa600bd;
+  border-radius: 5px;
+  padding-top: 10px;
+}
+
+.tabs-color{
+  color: #fd7921 !important;; 
+  font-weight: bold !important;
+}
