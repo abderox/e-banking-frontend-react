@@ -40,9 +40,9 @@ function VHmenu() {
                       Something else here
                     </NavDropdown.Item>
                   </NavDropdown>
-                  <Nav.Link href="#">
-                    <Link to={"/admin-board/clients-operations"} className="text-decoration-none text-secondary">Clients</Link>
-                  </Nav.Link>
+                 
+                    <Link to={"/admin-board/clients-operations"} className="text-decoration-none text-secondary nav-link">Clients</Link>
+            
                   <Nav.Link href="#">Link</Nav.Link>
                  
                 </Nav>

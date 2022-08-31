@@ -19,6 +19,7 @@ import Error404 from './common/containers/404';
 import AdminProfile from './pages/ProfilePage/Containers/ProfileAdmin';
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

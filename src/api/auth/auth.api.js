@@ -25,20 +25,39 @@ const login = (email, password, url) => {
 };
 
 
-const logout = () => {
+const logout = (url) => {
 
-    axios.get(URL.API_URL_V2 + URL.SIGN_OUT_URL_ADMIN, authHeader()).then(response => {
-        if ( response.status === 200 ) {
+    axios.get(URL.API_URL_V2 + url, authHeader()).then(response => {
+        if (response.status === 200) {
             localStorage.removeItem("adria-user");
         }
-       
+
     }).catch(error => {
-        if(error.toString().includes("401") || error.toString().includes("403")){
+        if (error.toString().includes("401") || error.toString().includes("403")) {
             localStorage.removeItem("adria-user");
         }
-        });
+    });
+};
+
+
+const NotvalidJwt = () => {
+    const user = JSON.parse(localStorage.getItem("adria-user"));
+    if (user) {
+        const decodedJwt = parseJwt(user.accessToken);
+        return (decodedJwt.exp * 1000 < Date.now())
+
+    }
+    return true;
+}
+
+const parseJwt = (token) => {
+    try {
+        return JSON.parse(atob(token.split(".")[1]));
+    } catch (e) {
+        return null;
+    }
 };
 
 export default {
-    login, logout
+    login, logout, NotvalidJwt
 };     

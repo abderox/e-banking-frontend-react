@@ -1,3 +1,12 @@
+html{
+  height: 100%;
+  overflow-x: hidden;
+}
+body{
+  height: 100%;
+}
+
+
 label {
   display: block;
   margin-top: 10px;
@@ -11,12 +20,13 @@ label {
  
 }
 
+
 .card {
   z-index: 0;
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
-  margin-top: 10%;
+  margin-top: 7%;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -67,6 +77,25 @@ backdrop-filter: blur(8.5px);
   background: #fc9957;
   opacity: 0.9;
 }
+
+
+.button-login-reset {
+  margin-top: 20px;
+  background: #fd5f21;
+  font-weight: 300;
+  border: none;
+  padding: 8px;
+  padding-right: 10px;
+  color: #fff;
+  min-width: 5rem;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 
 .error-label {
   height: 30px;

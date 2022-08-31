@@ -1,5 +1,5 @@
 import Toast from 'react-bootstrap/Toast';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import Moment from 'react-moment';
 import 'moment-timezone';
@@ -8,18 +8,10 @@ import { connect } from 'react-redux';
 function ToastError(props) {
 
     const [showA, setShowA] = useState(true);
-    const [mQuery, setMQuery] = useState({
-        matches: window.innerWidth > 768 ? true : false,
-    });
-
-    useEffect(() => {
-        let mediaQuery = window.matchMedia("(min-width: 768px)");
-        mediaQuery.addListener(setMQuery);
-        return () => mediaQuery.removeListener(setMQuery);
-    }, []);
+   
 
     return (
-        <ToastContainer className="p-3" position={mQuery && mQuery.matches ? props.props.position : "top-center"}>
+        <ToastContainer className="p-3" position={ "top-center"}>
 
             <Toast onClose={() => (setShowA(!showA))} show={showA} className={`${props.isdarkMode ? "":"toast-dark" }`}>
                 <Toast.Header className={`${props.isdarkMode ? "":"toast-dark" }`}>
@@ -29,11 +21,12 @@ function ToastError(props) {
                         alt=""
                     />
                     <strong className="me-auto">{props.props.code}</strong>
+                    {props.dateToFormat && 
                     <small>
 
                         <Moment format="HH:mm:ss" interval={1}>{props.dateToFormat}</Moment>
 
-                    </small>
+                    </small> }
                 </Toast.Header>
                 <Toast.Body> <strong>{props.props.status} </strong> : {props.props.message}</Toast.Body>
             </Toast>

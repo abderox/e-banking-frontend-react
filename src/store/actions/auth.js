@@ -26,12 +26,26 @@ import AuthApi from '../../api/auth/auth.api';
     );
 }
 
- const logout = () => (dispatch) => {
-    AuthApi.logout();
+ const logout = (url) => (dispatch) => {
+    AuthApi.logout(url);
     dispatch({
         type: type.LOGOUT,
     });
 };
+
+
+const setJwtExpired = () => {
+    return {
+        type: type.JWT_EXPIRED,
+    }
+}
+
+const setIsAdmin = () => {
+    return {
+        type: type.IS_ADMIN,
+    }
+}
+
 
 const reload =
     () => (dispatch) => {
@@ -39,4 +53,4 @@ const reload =
             type: type.MISSING_DATA,
         });}
 
-export  {login, logout,reload};
+export  {login, logout,reload, setJwtExpired, setIsAdmin};

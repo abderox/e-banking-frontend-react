@@ -3,6 +3,8 @@ import Input from "react-validation/build/input";
 
 function InputText({ props ,handleChange , value ,isDarkMode}) {
     return (
+
+        
         <div className={props.position}>
 
             <div className="d-flex justify-content-between">

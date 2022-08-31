@@ -15,6 +15,7 @@
     "react-bootstrap": "^2.5.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.34.2",
     "react-icons": "^4.4.0",
     "react-moment": "^1.1.2",
     "react-password-checklist": "^1.4.1",

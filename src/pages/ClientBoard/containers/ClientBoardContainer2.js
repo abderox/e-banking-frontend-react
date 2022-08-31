@@ -38,7 +38,7 @@ const ClientBoardContainer2 = (props) => {
 
       <p>
         <strong>Full name:</strong>
-        {props.currentUser.nom ? props.currentUser.nom : "not found "} {props.currentUser.prenom  ? props.currentUser.prenom : "not found"}
+        {props.currentUser.lastName ? props.currentUser.lastName : "not found "} {props.currentUser.firstName  ? props.currentUser.firstName : "not found"}
 
       </p>
 

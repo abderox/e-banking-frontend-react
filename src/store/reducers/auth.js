@@ -3,10 +3,11 @@
 */
 
 import * as type from '../actions/actionTypes';
+import authApi from '../../api/auth/auth.api';
 
 const user = JSON.parse(localStorage.getItem('adria-user'));
 const initialState = user ?
-{isLoggedIn: true,user} : {isLoggedIn: false,user:null};
+{isLoggedIn: true,user ,jwtExpired : authApi.NotvalidJwt(),isAdmin : false} : {isLoggedIn: false,user:null , jwtExpired : false,isAdmin:false};
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -20,6 +21,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoggedIn: false,
+                isAdmin: false,
+                jwtExpired: false,
                 user: null
             }
         case type.LOGIN_FAIL:
@@ -34,6 +37,18 @@ export default (state = initialState, action) => {
                 isLoggedIn:true,
                 user : user,
             }
+        case type.JWT_EXPIRED :
+            return {
+                ...state,
+                jwtExpired : true,
+            }
+        case type.IS_ADMIN :
+            return {
+                ...state,
+                isAdmin : true,
+            }
+
+
         default:
             return state;
     }

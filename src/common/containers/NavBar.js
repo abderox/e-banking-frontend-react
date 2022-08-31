@@ -12,7 +12,8 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import Switchtoggle from '../components/switch-toggle'
 import "../../static/css/Navbar.css"
 import { logout } from "../../store/actions/auth";
-
+import * as type from '../../utils/constants';
+const URL = type.default;
 
 
 export function Navbar(props) {
@@ -22,8 +23,8 @@ export function Navbar(props) {
     const target = useRef(null);
 
     const logOut = () => {
-        props.logout();
-        navigate("/login");
+        props.logout( props.isAdmin ? URL.SIGN_OUT_URL_ADMIN : URL.SIGN_OUT_URL_CLIENT );
+        navigate(props.isAdmin ? "/login-admin" : "/login");
 
     };
 
@@ -94,13 +95,14 @@ export function Navbar(props) {
 const mapToStateProps = (state) => {
     return {
         currentUser: state.auth.user,
-        isdarkMode: state.darkMode.isdarkMode
+        isdarkMode: state.darkMode.isdarkMode,
+        isAdmin: state.auth.isAdmin,
     };
 }
 
 const mapToDispatchProps = (dispatch) => {
     return {
-        logout: () => dispatch(logout()),
+        logout: (url) => dispatch(logout(url)),
     };
 }
 

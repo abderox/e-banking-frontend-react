@@ -6,15 +6,16 @@ function TableC({ tableData , tableHead}) {
     return (
 
 
-        <div className="pt-4 mt-2 bg-color-div">
-        <Table striped bordered hover>
+        <div className="pt-4 mt-2 bg-color-div overflow-auto">
+        <Table striped bordered hover >
             <thead>
-                <th>N°</th>
+                <tr>
             {tableHead.map((value,index)=>
             {
                 return (<th key={index}>{value}</th>)
             }
             )}
+            </tr>
             </thead>
             <tbody>
                 {
@@ -28,6 +29,7 @@ function TableC({ tableData , tableHead}) {
                                 <td>{data.numPieceIdentiteClient}</td>
                                 <td>{data.provincAddress}</td>
                                 <td>{data.rue}</td>
+                                <td>{data.statusProfile}</td>
                             </tr>
                         )
                     })
