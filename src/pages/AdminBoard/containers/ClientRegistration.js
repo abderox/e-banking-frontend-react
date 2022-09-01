@@ -179,7 +179,7 @@ const ClientRegistration = (props) => {
 const mapStateToProps = (state) => {
     return {
         user: state.auth.user,
-        createdClient: state.registerClient.createdClient,
+        createdClient: state.backoffice.createdClient,
         message: state.message.message,
         isdarkMode: state.darkMode.isdarkMode,
         isLoggedIn: state.auth.isLoggedIn,

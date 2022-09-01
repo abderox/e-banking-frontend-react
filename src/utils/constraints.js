@@ -22,7 +22,7 @@ const email = value => {
     }
 };
 const stringType = value => {
-   
+
     if (value && !value.match(/^[a-zA-Z\s]*$/)) {
         return (
             <small className="text-danger ">invalid type ! only letters are allowed </small>
@@ -31,7 +31,7 @@ const stringType = value => {
 };
 
 const idCode = value => {
-   
+
     if (value && !value.match(/^[A-Za-z0-9]*$/)) {
         return (
             <small className="text-danger ">only letters and numbers are allowed ! </small>
@@ -54,6 +54,33 @@ const telephone = (value) => {
     }
 };
 
+const montant_ = (value) => {
+
+    
+    let count = value ? value.length : 0;
+
+    if (value && !value.match(/\d+(\.)\d+$/)) {
+        return (
+            <small className="text-danger ">Insert amount as this format 1800.0</small>
+        );
+    }
+
+    let countPeriods = value ? value.match(/\./g).length : 0;
+    if (countPeriods > 1) {
+        return (
+            <small className="text-danger ">One period is allowed</small>
+        );
+    }
+   
+    let countNumbers = value ? value.split(".")[0] : 0;
+    if (value && (countPeriods === 1) ) {
+        if(countNumbers.length>=7) {
+        return (
+            <small className="text-danger ">Consult the director</small>
+        );}
+    }
+};
 
 
-export { required, email ,telephone,stringType,idCode};
+
+export { required, email, telephone, stringType, idCode, montant_ };

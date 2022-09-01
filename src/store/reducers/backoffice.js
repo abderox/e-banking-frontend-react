@@ -4,6 +4,7 @@ const initialState = {};
 export default (state = initialState, action) => {
 
     switch (action.type) {
+        
         case type.RESPONSE_POST:
             return {
                 createdClient: true
@@ -16,6 +17,19 @@ export default (state = initialState, action) => {
             return {
                 createdClient: false
             }
+        case type.CREATED_SUCCESS:
+            return {
+                createdSuccess : true
+            }
+        case type.CREATED_FAIL:
+            return {
+                createdSuccess : false
+            }
+        case type.CLEAR_CREATED:
+            return {
+                createdSuccess : false
+            }
+            
         default:
             return state;
     }

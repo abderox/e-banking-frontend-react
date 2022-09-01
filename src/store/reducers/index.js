@@ -6,13 +6,13 @@ import {combineReducers} from 'redux';
 import auth from './auth';
 import message from './message';
 import darkModeReducer from "./darkMode";
-import registerClient from "./backoffice";
+import backoffice from "./backoffice";
 
 const rootReducer = combineReducers({
     auth,
     message,
     darkMode: darkModeReducer,
-    registerClient 
+    backoffice 
 });
 
 export default rootReducer;

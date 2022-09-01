@@ -1,11 +1,13 @@
 import React from 'react'
+import {connect} from 'react-redux';
 import Table from 'react-bootstrap/Table';
 import SpinnerGrow from '../../../common/components/spinner'
 import CheckStatus from '../components/checkStatus'
 import ModalBoot from './modal';
+import ToastError from '../../../common/components/toastError';
+import Toasts from '../../../common/components/toast';
 
-
-function TableC({ tableData, tableHead, loading, handleRefresh }) {
+function TableC(props) {
 
   
 
@@ -15,24 +17,49 @@ function TableC({ tableData, tableHead, loading, handleRefresh }) {
     mappingStatus.set("SUSPENDU", "warning");
     mappingStatus.set("BLOQUE", "dark");
 
+    const toast = {
+        title: "success",
+        body: "Account created successfully !",
+        position: "top-center",
+        place: "toast-position"
+    }
+   
     return (
 
+        <>
+         <div className="form-row row  ">
+                <div className="col">
+                    <label className="text-muted">Bank : <strong >{props.bankName}</strong></label>
+
+                </div>
+                <div className="col">
+                    <label className="text-muted">Agence : #<strong>{props.codeAgence}</strong> </label>
+                </div>
+                <div className="col">
+                    <label className="text-muted">ID Banker : #<strong>{props.identifiant}</strong></label>
+                </div>
+            </div>
 
         <div className="pt-2 mt-1 bg-color-table overflow-auto">
-            <button type="button" className="refresh-button" onClick={handleRefresh}><img src="https://img.icons8.com/sf-black-filled/28/FFFFFF/recurring-appointment.png" alt="reset" /></button>
+           
+          
+             {props.message && <ToastError props={JSON.parse(props.message)} isdarkMode={props.isdarkMode} />}
+                {props.created && <Toasts props={toast} isdarkMode={props.isdarkMode} />}
+
+            <button type="button" className="refresh-button" onClick={props.handleRefresh}><img src="https://img.icons8.com/sf-black-filled/28/FFFFFF/recurring-appointment.png" alt="reset" /></button>
 
             <Table striped bordered hover >
                 <thead>
                     <tr>
-                        {tableHead.map((value, index) => {
+                        {props.tableHead.map((value, index) => {
                             return (<th key={index}>{value}</th>)
                         }
                         )}
                     </tr>
                 </thead>
                 <tbody>
-                    {loading ? <tr><td colSpan={tableHead.length}><SpinnerGrow /></td></tr> :
-                        tableData.map((data, index) => {
+                    {props.loading ? <tr><td colSpan={props.tableHead.length}><SpinnerGrow /></td></tr> :
+                        props.tableData.map((data, index) => {
                             return (
                                 <tr key={index} >
                                     <td>{index + 1}</td>
@@ -43,7 +70,7 @@ function TableC({ tableData, tableHead, loading, handleRefresh }) {
                                     <td><img src="https://img.icons8.com/material-outlined/24/40C057/crossed-out-date.png"  alt="img"/><span className="p-2 ">{data.createdAt.substring(0, 10)}</span></td>
                                     <td><CheckStatus type={mappingStatus.get(data.status)} status={data.status} /></td>
                                     <td>
-                                    <ModalBoot data={data.identifiantClient} key={index}/></td>
+                                    <ModalBoot data={data.identifiantClient} key={index} handleRefresh={props.handleRefresh}/></td>
                                 </tr>
                             )
                         })
@@ -52,7 +79,23 @@ function TableC({ tableData, tableHead, loading, handleRefresh }) {
             </Table>
         </div>
 
-
+        </>
     )
 }
-export default TableC;
+
+const mapStateToProps = (state,ownedProps) => {
+    return {
+        loading: ownedProps.loading,
+        tableData: ownedProps.tableData,
+        tableHead: ownedProps.tableHead,
+        handleRefresh: ownedProps.handleRefresh,
+        created : state.backoffice.createdSuccess,
+        message : state.message.message,
+        isdarkMode : state.darkMode.isdarkMode,
+        codeAgence: state.auth.user.codeAgence,
+        identifiant: state.auth.user.identifiantBanquier,
+        bankName: state.auth.user.bankName,
+    }
+}
+
+export default connect(mapStateToProps)(TableC)

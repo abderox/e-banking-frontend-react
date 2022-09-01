@@ -10,6 +10,7 @@ const AjouterCompte = () => {
     const [loading, setLoading] = useState(false);
     const [val, setval] = useState("");
     const [valE, setvalE] = useState("");
+    const [valS, setvalS] = useState("");
 
     const headNames = [
         "N°",
@@ -43,18 +44,22 @@ const AjouterCompte = () => {
     let handleChangeSearch = (e) => {
         const search = e.target.value;
         setval(search);
-        console.log(val);
     }
     let handleChangeSearchE = (e) => {
         const search = e.target.value;
         setvalE(search);
-        console.log(val);
+    }
+    let handleChangeSearchS = (e) => {
+        const search = e.target.value;
+        setvalS(search);
     }
 
     let searchTable = tableData.filter((row)=>{
         return row.identifiantClient.toLowerCase().indexOf(val.toLowerCase()) !== -1
     }).filter((row)=>{
         return row.email.toLowerCase().indexOf(valE.toLowerCase()) !== -1
+    }).filter((row)=>{
+        return row.status.toLowerCase().indexOf(valS.toLowerCase()) !== -1
     })
   
     return (
@@ -62,7 +67,9 @@ const AjouterCompte = () => {
             <div className="container mt-5 ">
                 <div className="row">
                     <div className="col-sm-12">
-                        <SearchInput handleChangeSearch={handleChangeSearch} value={val} handleChangeSearchE={handleChangeSearchE} valueE={valE}/>
+                        <SearchInput handleChangeSearch={handleChangeSearch} value={val}
+                         handleChangeSearchE={handleChangeSearchE} valueE={valE} 
+                         valueS={valS} handleChangeSearchS={handleChangeSearchS}/>
                         
                         <TableC tableData={searchTable} tableHead={headNames} loading={loading} handleRefresh={handleRefresh}/>
                     </div>

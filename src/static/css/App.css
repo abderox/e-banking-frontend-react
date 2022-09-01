@@ -292,9 +292,9 @@ perspective: 1000px;
   margin: 10px;
 }
 .bg-color-table{
-  background-color: #b9b9b91e;
+  background-color: #f9a8251e;
   font-family: 'Cairo', sans-serif;
-  font-size: 1.06rem;
+  font-size: 0.9rem;
 }
 
 .choose-action{
@@ -302,7 +302,7 @@ perspective: 1000px;
   width: 40px;
   height: 40px;
   position: relative;
-  background-color: #149fd6c7;
+  background-color: #fd5f21;
   border: none;
   top: 0px;
   margin: 10px;
@@ -310,4 +310,19 @@ perspective: 1000px;
 th, td {
 
   vertical-align: middle;
+}
+
+td:first-child {
+  font-size: 1.1rem !important;
+  font-weight: 400;
+  color: #130800;
+}
+
+thead {
+  text-align: center;
+  font-size: 1.01rem;
+  background-color: #f9a8251e;
+}
+tbody{
+  background-color: #b9b9b91e;
 }
