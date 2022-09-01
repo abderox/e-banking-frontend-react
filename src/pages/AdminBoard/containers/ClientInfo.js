@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import ClientRegistration from './ClientRegistration';
-
+import AjouterCompte from './AjouterCompte';
 function ClientInfo() {
   const [key, setKey] = useState('client-register');
 
@@ -18,15 +18,16 @@ function ClientInfo() {
       <Tab eventKey="client-register" title="Clients" tabClassName="tabs-color"> 
         <ClientRegistration />
       </Tab>
+      <Tab eventKey="comptes" title="Comptes" tabClassName="tabs-color">
+        <AjouterCompte />
+      </Tab>
       <Tab eventKey="Recherche" title="Recherche" tabClassName="tabs-color" >
         data
       </Tab>
       <Tab eventKey="transactions" title="Transactions" tabClassName="tabs-color">
         data
       </Tab>
-      <Tab eventKey="comptes" title="Comptes" tabClassName="tabs-color">
-        data
-      </Tab>
+     
     </Tabs>
   );
 }

@@ -6,7 +6,7 @@ function TableC({ tableData , tableHead}) {
     return (
 
 
-        <div className="pt-4 mt-2 bg-color-div overflow-auto">
+        <div className="pt-4 mt-2 bg-color-table overflow-auto">
         <Table striped bordered hover >
             <thead>
                 <tr>
@@ -30,6 +30,7 @@ function TableC({ tableData , tableHead}) {
                                 <td>{data.provincAddress}</td>
                                 <td>{data.rue}</td>
                                 <td>{data.statusProfile}</td>
+                                <td><button className="refresh-button">action</button></td>
                             </tr>
                         )
                     })

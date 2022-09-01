@@ -21,6 +21,7 @@ export function Navbar(props) {
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
     const target = useRef(null);
+    const board = props.isAdmin ? "/admin-board/profile" : "/client-board/profile";
 
     const logOut = () => {
         props.logout( props.isAdmin ? URL.SIGN_OUT_URL_ADMIN : URL.SIGN_OUT_URL_CLIENT );
@@ -51,7 +52,7 @@ export function Navbar(props) {
                     {props.currentUser ? (
                         <>
                             <li >
-                                <Link to={"/profile"} className="nav-item mt-1 pt-2 link-nav">
+                                <Link to={board} className="nav-item mt-1 pt-2 link-nav">
                                     {props.currentUser.username}
                                 </Link>
                             </li>

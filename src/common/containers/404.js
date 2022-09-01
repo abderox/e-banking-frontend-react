@@ -99,8 +99,10 @@ const Error404 = () => {
     <div  className="error-div text-text">
         <h1 className="error-title-h1">404 Error</h1>  
       <h2>Couldn't launch :(</h2>
+      <h2>Either you are unauthorized  to see this page  </h2>
+      <h2>Or it doesn't exist ! </h2>
          <h3>Page Not Found - lets take you Back </h3>
-            <button className="btn btn-dark" onClick={() => navigate(-1)}>Go Back</button> 
+            <button className="btn btn-dark" onClick={() => navigate(-2)}>Go Back</button> 
     </div>
     </>
     )

@@ -8,7 +8,7 @@ import PasswordChecklist from "react-password-checklist";
 import { email, required } from '../../../utils/constraints';
 import InputText from '../components/inputText';
 import ButtonLogin from '../components/buttonLogin';
-import { login,setIsAdmin } from "../../../store/actions/auth";
+import { login,setIsAdmin ,setIsClient} from "../../../store/actions/auth";
 import PopoverPositioned from '../../../common/components/popover';
 
 
@@ -71,7 +71,13 @@ function FormLogin(props) {
         if (checkBtn.current.context._errors.length === 0) {
             props.signing(username, password, props.loginUrl)
                 .then(() => {
+                    if(props.loginUrl.includes("admin"))
+                    {
                         props.setIsAdmin();
+                    }
+                    else{
+                        props.setIsClient()
+                    }
                         navigate(props.url)
                 })
                 .catch(() => {
@@ -132,7 +138,8 @@ const mapToProps = (state, ownedProps) => {
 const mapToDispatch = (dispatch) => {
     return {
         signing: (username, password, url) => dispatch(login(username, password, url)),
-        setIsAdmin: () => dispatch(setIsAdmin())
+        setIsAdmin: () => dispatch(setIsAdmin()),
+        setIsClient: () => dispatch(setIsClient())
 
     }
 }

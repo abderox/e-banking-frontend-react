@@ -1,5 +1,5 @@
 import * as type from './actionTypes';
-import registerClientService from '../../api/auth/backoffice';
+import {registerClientService} from '../../api/auth/backoffice';
 
 const registerClient = (data) => (dispatch) => {
     return registerClientService(data).then(response => {

@@ -12,3 +12,4 @@ export const RESPONSE_POST_FAIL = "RESPONSE_POST_FAIL";
 export const CLEAR_CREATED_CLIENT = "CLEAR_CREATED_CLIENT";
 export const JWT_EXPIRED = "JWT_EXPIRED";
 export const IS_ADMIN = "IS_ADMIN";
+export const IS_CLIENT = "IS_CLIENT";

@@ -21,6 +21,10 @@ const AdminBoardContainer = (props) => {
     {
       return <Navigate to="/login-admin" replace />;
     }
+    if(!props.isAdmin)
+    {
+      return <Navigate to="*" replace />;
+    }
     
 
       return (
@@ -44,7 +48,8 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.auth.user,
     isLoggedIn: state.auth.isLoggedIn,
-    jwtExpired: state.auth.jwtExpired
+    jwtExpired: state.auth.jwtExpired,
+    isAdmin: state.auth.isAdmin
   }
 }
 

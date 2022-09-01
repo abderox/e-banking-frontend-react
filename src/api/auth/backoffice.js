@@ -13,4 +13,7 @@ const registerClientService = (data) => {
     return axios.post(URL.API_URL_V2 + URL.SIGN_UP_URL_CLIENT, data,  authHeader() );
   };
 
-export default registerClientService;
+  const getClientsFoAccounts = async () => {
+    return await axios.get(URL.API_URL_V2 + "/get-clients-agence",  authHeader() );
+  };
+export  {registerClientService , getClientsFoAccounts};

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap');
 html{
   height: 100%;
   overflow-x: hidden;
@@ -273,4 +274,40 @@ perspective: 1000px;
 .tabs-color{
   color: #fd7921 !important;; 
   font-weight: bold !important;
+}
+
+.refresh-button {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  background-color: #fd5f21;
+  border: 3px dotted #d88303;
+  top: 0px;
+  margin: 10px;
+}
+.refresh-button:hover {
+  background-color: #e7622d;
+  border: 3px dotted #c08121;
+  margin: 10px;
+}
+.bg-color-table{
+  background-color: #b9b9b91e;
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.06rem;
+}
+
+.choose-action{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  background-color: #149fd6c7;
+  border: none;
+  top: 0px;
+  margin: 10px;
+}
+th, td {
+
+  vertical-align: middle;
 }

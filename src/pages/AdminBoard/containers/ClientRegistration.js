@@ -32,12 +32,13 @@ const ClientRegistration = (props) => {
         "N° piece",
         "province",
         "street",
-        "statusProfile"
+        "statusProfile",
+        "action"
     ]
 
     const [formInputData, setformInputData] = useState(
         {
-            codeAgence: codeAgence,
+            codeAgence: props.user.codeAgence,
             email: '',
             lastName: '',
             firstName: '',
@@ -57,7 +58,7 @@ const ClientRegistration = (props) => {
 
     const toast = {
         title: "success",
-        body: "Client registered successfully",
+        body: "Client registered successfully !",
         position: "top-center",
         place: "toast-position"
     }
@@ -72,6 +73,7 @@ const ClientRegistration = (props) => {
 
     const resetForm = () => {
         const emptyInput = {
+            codeAgence: props.user.codeAgence,
             email: '',
             lastName: '',
             firstName: '',
@@ -96,7 +98,7 @@ const ClientRegistration = (props) => {
             return <Navigate to={"/login-admin"} replace />
         }
 
-        const codeAgenceAdded = (data) => ({ ...data, codeAgence: props.codeAgence })
+        const codeAgenceAdded = (data) => ({ ...data, codeAgence: props.user.codeAgence })
         setformInputData(codeAgenceAdded)
         let arrayValidation = [];
         const checkEmptyInput = !Object.values(formInputData).some(el => el === '')
@@ -112,26 +114,26 @@ const ClientRegistration = (props) => {
                     arrayValidation.push(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(val))
                     break;
                 case "provincAddress":
-                    arrayValidation.push(/^[a-zA-Z]*$/.test(val))
+                    arrayValidation.push(/^[a-zA-Z\s]*$/.test(val))
                     break;
                 case "villeAddress":
-                    arrayValidation.push(/^[a-zA-Z]*$/.test(val))
+                    arrayValidation.push(/^[a-zA-Z\s]*$/.test(val))
                     break;
                 case "regionAddress":
-                    arrayValidation.push(/^[a-zA-Z]*$/.test(val))
+                    arrayValidation.push(/^[a-zA-Z\s]*$/.test(val))
                     break;
                 case "firstName":
-                    arrayValidation.push(/^[a-zA-Z]*$/.test(val))
+                    arrayValidation.push(/^[a-zA-Z\s]*$/.test(val))
                     break;
                 case "lastName":
-                    arrayValidation.push(/^[a-zA-Z]*$/.test(val))
+                    arrayValidation.push(/^[a-zA-Z\s]*$/.test(val))
                     break;
                 case "email":
                     arrayValidation.push(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(val))
                     break;
             }
         })
-
+    
 
         if (checkEmptyInput && !props.jwtExpired && arrayValidation.every(el => el === true)) {
 
@@ -141,12 +143,13 @@ const ClientRegistration = (props) => {
 
             props.registerClient(formInputData)
                 .then(res => {
+                    console.log(res)
                     setLoading(false);
                     const newData = (data) => ([...data, formInputData])
                     setTableData(newData);
                     resetForm();
                 }).catch(err => {
-                    console.error(err.status)
+                    console.log(err)
                     setLoading(false);
                 }
                 )

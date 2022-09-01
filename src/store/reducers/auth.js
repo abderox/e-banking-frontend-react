@@ -6,8 +6,10 @@ import * as type from '../actions/actionTypes';
 import authApi from '../../api/auth/auth.api';
 
 const user = JSON.parse(localStorage.getItem('adria-user'));
+const role_client = user? authApi.extractRoles().includes("ROLE_CLIENT") : false;
+const role_admin = user ?authApi.extractRoles().includes("ROLE_ADMIN") : false;
 const initialState = user ?
-{isLoggedIn: true,user ,jwtExpired : authApi.NotvalidJwt(),isAdmin : false} : {isLoggedIn: false,user:null , jwtExpired : false,isAdmin:false};
+{isLoggedIn: true,user ,jwtExpired : authApi.NotvalidJwt(),isAdmin: role_admin,isClient: role_client} : {isLoggedIn: false,user:null , jwtExpired : false,isAdmin:false , isClient:false};
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -22,6 +24,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 isAdmin: false,
+                isClient: false,
                 jwtExpired: false,
                 user: null
             }
@@ -46,6 +49,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isAdmin : true,
+            }
+        case type.IS_CLIENT :
+            return {
+                ...state,
+                isClient : true,
             }
 
 

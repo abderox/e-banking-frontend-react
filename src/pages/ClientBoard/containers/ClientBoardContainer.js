@@ -20,6 +20,11 @@ const ClientBoardContainer = (props) => {
     return <Navigate to="/login" replace />;
   }
 
+  if(!props.isClient)
+    {
+      return <Navigate to="*" replace />;
+    }
+
 
 
   return (
@@ -39,7 +44,8 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.auth.user,
     isLoggedIn: state.auth.isLoggedIn,
-    jwtExpired: state.auth.jwtExpired
+    jwtExpired: state.auth.jwtExpired,
+    isClient: state.auth.isClient
   }
 }
 

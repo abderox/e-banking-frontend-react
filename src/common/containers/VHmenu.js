@@ -41,7 +41,7 @@ function VHmenu() {
                     </NavDropdown.Item>
                   </NavDropdown>
                  
-                    <Link to={"/admin-board/clients-operations"} className="text-decoration-none text-secondary nav-link">Clients</Link>
+                    <Link to={"/admin-board/clients-operations"} className="text-decoration-none text-secondary nav-link">New clients</Link>
             
                   <Nav.Link href="#">Link</Nav.Link>
                  

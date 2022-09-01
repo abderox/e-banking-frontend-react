@@ -45,6 +45,11 @@ const setIsAdmin = () => {
         type: type.IS_ADMIN,
     }
 }
+const setIsClient = () => {
+    return {
+        type: type.IS_CLIENT,
+    }
+}
 
 
 const reload =
@@ -53,4 +58,4 @@ const reload =
             type: type.MISSING_DATA,
         });}
 
-export  {login, logout,reload, setJwtExpired, setIsAdmin};
+export  {login, logout,reload, setJwtExpired, setIsAdmin,setIsClient};

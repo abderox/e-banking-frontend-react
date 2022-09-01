@@ -50,6 +50,16 @@ const NotvalidJwt = () => {
     return true;
 }
 
+const extractRoles = () => {
+    const user = JSON.parse(localStorage.getItem("adria-user"));
+    if (user) {
+        const decodedJwt = parseJwt(user.accessToken);
+        return decodedJwt.roles;
+
+    }
+    return "null";
+}
+
 const parseJwt = (token) => {
     try {
         return JSON.parse(atob(token.split(".")[1]));
@@ -59,5 +69,5 @@ const parseJwt = (token) => {
 };
 
 export default {
-    login, logout, NotvalidJwt
+    login, logout, NotvalidJwt,extractRoles
 };     
