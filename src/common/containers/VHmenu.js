@@ -28,11 +28,11 @@ function VHmenu() {
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                 <NavDropdown
-                    title="Dropdown"
+                    title="Operation"
                     id={`offcanvasNavbarDropdown-expand-${"sm"}`}
                   >
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
+                    <NavDropdown.Item >Action</NavDropdown.Item>
+                    <NavDropdown.Item>
                       Another action
                     </NavDropdown.Item>
                     <NavDropdown.Divider />

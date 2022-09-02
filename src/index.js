@@ -17,7 +17,7 @@ import AdminBoardContainer from './pages/AdminBoard/containers/AdminBoardContain
 import ClientInfo from './pages/AdminBoard/containers/ClientInfo';
 import Error404 from './common/containers/404';
 import AdminProfile from './pages/ProfilePage/Containers/ProfileAdmin';
-
+import ClientBoard from './pages/ClientBoard/containers/ClientInfo';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -32,6 +32,7 @@ root.render(
           </Route>
           <Route path="login" element={<LoginClient />} />
           <Route path="client-board" element={<ClientBoardContainer />}>
+            <Route path="services" element={<ClientBoard />} />
             <Route path="profile" element={<ClientBoardContainer2 />} />
           </Route>
         </Route>

@@ -54,6 +54,24 @@ const telephone = (value) => {
     }
 };
 
+
+
+const rib = (value) => {
+    let count = value ? value.length : 0;
+    if (value && !value.match(/\d/g)) {
+        return (
+            <small className="text-danger ">only digits are allowed ! </small>
+        );
+    }
+
+    if (count < 24 || count > 24) {
+        return (
+            <small className="text-danger ">rib consists of 24 digits</small>
+        );
+    }
+};
+
+
 const montant_ = (value) => {
 
     
@@ -83,4 +101,4 @@ const montant_ = (value) => {
 
 
 
-export { required, email, telephone, stringType, idCode, montant_ };
+export { required, email, telephone, stringType, idCode, montant_ ,rib};

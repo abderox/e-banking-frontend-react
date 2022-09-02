@@ -6,7 +6,7 @@ import * as type from '../actions/actionTypes';
 import authApi from '../../api/auth/auth.api';
 
 const user = JSON.parse(localStorage.getItem('adria-user'));
-const role_client = user? authApi.extractRoles().includes("ROLE_CLIENT") : false;
+const role_client = user? authApi.extractRoles().includes("ROLE_ACTIVE_CLIENT") : false;
 const role_admin = user ?authApi.extractRoles().includes("ROLE_ADMIN") : false;
 const initialState = user ?
 {isLoggedIn: true,user ,jwtExpired : authApi.NotvalidJwt(),isAdmin: role_admin,isClient: role_client} : {isLoggedIn: false,user:null , jwtExpired : false,isAdmin:false , isClient:false};

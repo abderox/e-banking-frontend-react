@@ -53,7 +53,7 @@ const Login = (props) => {
 
     useEffect(() => {
         if (props.isLoggedIn) {
-            navigate("/client-board");
+            navigate("/client-board/services");
             props.clearMessage();
         }
     } , [props.isLoggedIn]);
@@ -69,7 +69,7 @@ const Login = (props) => {
             {props.message && (
                 <ToastError props={JSON.parse(props.message)} date={dateToFormat} />
             )}
-            <FormLogin to={"/client-board"} url={URL.SIGN_IN_URL_CLIENT} showMsg={true} />
+            <FormLogin to={"/client-board/services"} url={URL.SIGN_IN_URL_CLIENT} showMsg={true} />
         </div>
     );
 };
