@@ -30,7 +30,7 @@ function TableC({ tableData , tableHead}) {
                                 <td>{data.provincAddress}</td>
                                 <td>{data.rue}</td>
                                 <td>{data.statusProfile}</td>
-                                <td><button className="refresh-button">action</button></td>
+                                {/* <td><button className="refresh-button">action</button></td> */}
                             </tr>
                         )
                     })

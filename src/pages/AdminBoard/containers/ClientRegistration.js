@@ -33,7 +33,7 @@ const ClientRegistration = (props) => {
         "province",
         "street",
         "statusProfile",
-        "action"
+      
     ]
 
     const [formInputData, setformInputData] = useState(

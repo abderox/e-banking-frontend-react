@@ -8,4 +8,9 @@ const addBenificiare = (data) => {
     return axios.post(URL.API_URL_V2 + "/add-benificiary", data,  authHeader() );
   };
 
-export  {addBenificiare};
+
+  const getAccounts = () => {
+    return axios.get(URL.API_URL_V2 + "/get-accounts-client",   authHeader() );
+  };
+
+export  {addBenificiare,getAccounts};

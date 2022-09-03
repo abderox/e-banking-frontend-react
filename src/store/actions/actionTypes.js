@@ -16,3 +16,5 @@ export const CLEAR_CREATED_CLIENT = "CLEAR_CREATED_CLIENT";
 export const JWT_EXPIRED = "JWT_EXPIRED";
 export const IS_ADMIN = "IS_ADMIN";
 export const IS_CLIENT = "IS_CLIENT";
+export const GET_SUCCESS = "GET_SUCCESS";
+export const GET_FAIL = "GET_FAIL";

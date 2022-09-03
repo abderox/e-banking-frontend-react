@@ -14,7 +14,7 @@ const registerClientService = (data) => {
   };
 
 const getClientsFoAccounts = async () => {
-    return await axios.get(URL.API_URL_V2 + "/get-clients-agence",  authHeader() );
+    return await axios.get(URL.API_URL_V2 + "/get-recent-clients",  authHeader() );
   };
 
 const addFirstAccount = (data) => {

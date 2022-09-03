@@ -22,9 +22,10 @@ export function Navbar(props) {
     const [show, setShow] = useState(false);
     const target = useRef(null);
     const board = props.isAdmin ? "/admin-board/profile" : "/client-board/profile";
+    const services = "/client-board/services";
 
     const logOut = () => {
-        props.logout( props.isAdmin ? URL.SIGN_OUT_URL_ADMIN : URL.SIGN_OUT_URL_CLIENT );
+        props.logout(props.isAdmin ? URL.SIGN_OUT_URL_ADMIN : URL.SIGN_OUT_URL_CLIENT);
         navigate(props.isAdmin ? "/login-admin" : "/login");
 
     };
@@ -50,7 +51,17 @@ export function Navbar(props) {
             >
                 <ul>
                     {props.currentUser ? (
+
                         <>
+                            {props.isClient &&
+
+                                <li >
+                                    <Link to={services} className="nav-item mt-1 pt-2 link-nav">
+                                        services
+                                    </Link>
+                                </li>
+                            }
+
                             <li >
                                 <Link to={board} className="nav-item mt-1 pt-2 link-nav">
                                     {props.currentUser.username}
@@ -98,6 +109,7 @@ const mapToStateProps = (state) => {
         currentUser: state.auth.user,
         isdarkMode: state.darkMode.isdarkMode,
         isAdmin: state.auth.isAdmin,
+        isClient: state.auth.isClient,
     };
 }
 
