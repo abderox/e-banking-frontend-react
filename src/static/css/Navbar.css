@@ -16,7 +16,7 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 0.5rem 0rem;
+    padding: 0.5rem 0.4rem;
     background-color: #fff;
     color: black;
     box-shadow: rgba(0, 255, 76, 0.37) 0px 2px 4px -1px, rgba(20, 71, 0, 0.205) 0px 0px 5px -1px, rgba(5, 151, 24, 0.055) 0px 0px 3px -1px inset;

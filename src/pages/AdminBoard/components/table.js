@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {connect} from 'react-redux';
 import Table from 'react-bootstrap/Table';
 import SpinnerGrow from '../../../common/components/spinner'
@@ -6,6 +6,9 @@ import CheckStatus from '../components/checkStatus'
 import ModalBoot from './modal';
 import ToastError from '../../../common/components/toastError';
 import Toasts from '../../../common/components/toast';
+import { apiMessage } from "../../../store/actions";
+import {  clearCreatedRes } from '../../../store/actions/backoffice';
+
 
 function TableC(props) {
 
@@ -23,6 +26,14 @@ function TableC(props) {
         position: "top-center",
         place: "toast-position"
     }
+
+    useEffect(() => {
+      props.clearMessage();
+      props.clearCreatedRes();
+    }, []);
+
+
+  
    
     return (
 
@@ -97,5 +108,10 @@ const mapStateToProps = (state,ownedProps) => {
         bankName: state.auth.user.bankName,
     }
 }
-
-export default connect(mapStateToProps)(TableC)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearMessage: () => dispatch(apiMessage.clearMessage()),
+        clearCreatedRes: () => dispatch(clearCreatedRes()),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TableC)

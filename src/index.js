@@ -18,6 +18,8 @@ import ClientInfo from './pages/AdminBoard/containers/ClientInfo';
 import Error404 from './common/containers/404';
 import AdminProfile from './pages/ProfilePage/Containers/ProfileAdmin';
 import ClientBoard from './pages/ClientBoard/containers/ClientInfo';
+import Comptes from './pages/ClientBoard/components/comptes';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -36,6 +38,7 @@ root.render(
             <Route path="profile" element={<ClientBoardContainer2 />} />
           </Route>
         </Route>
+        <Route path="comptes" element={<Comptes />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Provider>

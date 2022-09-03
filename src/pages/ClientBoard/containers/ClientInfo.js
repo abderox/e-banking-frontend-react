@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import AddBenificiare from './addBenificiare';
+import DisplayAccounts from './displayComptes'
 
 function ClientBoard() {
   const [key, setKey] = useState('client-register');
@@ -16,7 +17,7 @@ function ClientBoard() {
      
     >
       <Tab eventKey="client-register" title="Comptes" tabClassName="tabs-color"> 
-        data
+      <DisplayAccounts/>
       </Tab>
       <Tab eventKey="comptes" title="Transactions" tabClassName="tabs-color">
        data

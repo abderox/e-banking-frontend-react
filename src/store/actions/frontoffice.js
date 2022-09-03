@@ -1,5 +1,5 @@
 import * as type from './actionTypes';
-import {addBenificiare} from '../../api/client/client.services';
+import {addBenificiare,getAccounts} from '../../api/client/client.services';
 
 
 const addBenificiareToClient = (data) => (dispatch) => {
@@ -24,5 +24,30 @@ const addBenificiareToClient = (data) => (dispatch) => {
 
     })}
 
+const getAccountsClient = () => (dispatch) => {
+    return getAccounts().then(response => {
+        dispatch({
+            type: type.GET_SUCCESS,
+            payload: response.data
+        });
+      
+        return Promise.resolve(response);
 
-export {addBenificiareToClient};
+    }, error => {
+        const message = error.response.data || error;
+
+        dispatch({
+            type: type.GET_FAIL,
+        }
+        )
+        dispatch({
+            type: type.SET_MESSAGE,
+            payload: message
+        });
+        return Promise.reject();
+
+    })}
+
+
+
+export {addBenificiareToClient,getAccountsClient};
