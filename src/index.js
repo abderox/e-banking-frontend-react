@@ -12,7 +12,7 @@ import App from './App';
 import Login from './pages/LoginPage/containers/LoginAdminContainer';
 import LoginClient from './pages/LoginPage/containers/LoginClientContainer';
 import ClientBoardContainer from './pages/ClientBoard/containers/ClientBoardContainer';
-import ClientBoardContainer2 from './pages/ClientBoard/containers/ClientBoardContainer2';
+import ProfileClient from './pages/ClientBoard/containers/profileClient';
 import AdminBoardContainer from './pages/AdminBoard/containers/AdminBoardContainer';
 import ClientInfo from './pages/AdminBoard/containers/ClientInfo';
 import Error404 from './common/containers/404';
@@ -35,7 +35,7 @@ root.render(
           <Route path="login" element={<LoginClient />} />
           <Route path="client-board" element={<ClientBoardContainer />}>
             <Route path="services" element={<ClientBoard />} />
-            <Route path="profile" element={<ClientBoardContainer2 />} />
+            <Route path="profile" element={<ProfileClient />} />
           </Route>
         </Route>
         <Route path="comptes" element={<Comptes />} />
