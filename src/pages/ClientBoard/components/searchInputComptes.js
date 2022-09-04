@@ -5,7 +5,7 @@ const SearchInput = ({ handleChangeSearch, inputData }) => {
         <div className="p-4 border bg-color-div" >
             <div className="d-flex justify-content-center ">
 
-                <h1 className="display-6 text-center">Browse accounts</h1>
+                <h1 className="display-6 text-center font-weight-bold">Browse accounts</h1>
 
             </div>
 

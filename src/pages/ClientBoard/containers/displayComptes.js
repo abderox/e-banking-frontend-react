@@ -24,27 +24,32 @@ const DisplayAccounts = (props) => {
 
 
     useEffect(() => {
-        handleRefresh()
+        initData()
     }, [])
+
+
+    const initData = () => {
+
+        if (props.accountsClient.length > 0) {
+            setTableData(props.accountsClient);
+            setLoading(false);
+        }
+        else {
+            handleRefresh();
+        }
+    }
+
 
     const handleRefresh = () => {
 
         setLoading(true);
-
-        if (props.accountsClient.length === 0) {
-            props.getAccountsClient().then((res) => {
-                setTableData(res.data);
-                setLoading(false);
-            }).catch((err) => {
-                console.log(err);
-                setLoading(false);
-            })
-        }
-        else {
-            setTableData(props.accountsClient);
+        props.getAccountsClient().then((res) => {
+            setTableData(res.data);
             setLoading(false);
-        }
-
+        }).catch((err) => {
+            console.log(err);
+            setLoading(false);
+        })
     }
 
 

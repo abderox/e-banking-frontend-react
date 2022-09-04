@@ -3,6 +3,8 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import AddBenificiare from './addBenificiare';
 import DisplayAccounts from './displayComptes'
+import MakeTransfer from './makeTransfer'
+import DisplayTransactions from './displayTransactions'
 
 function ClientBoard() {
   const [key, setKey] = useState('client-register');
@@ -20,10 +22,10 @@ function ClientBoard() {
       <DisplayAccounts/>
       </Tab>
       <Tab eventKey="comptes" title="Transactions" tabClassName="tabs-color">
-       data
+      <DisplayTransactions />
       </Tab>
       <Tab eventKey="Recherche" title="Virements" tabClassName="tabs-color" >
-        data
+        <MakeTransfer />
       </Tab>
       <Tab eventKey="transactions" title="Benificiares" tabClassName="tabs-color">
         <AddBenificiare />

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 
 
-const ClientBoardContainer2 = (props) => {
+const ProfileClient = (props) => {
 
   let navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const ClientBoardContainer2 = (props) => {
       </header>
       <p>
         <strong>Token:</strong>
-        {props.currentUser.accessToken}
+        {props.currentUser.accessToken.substring(0,20)}
       </p>
       <p>
         <strong>Email:</strong> {props.currentUser.emailUser}
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(ClientBoardContainer2);
+export default connect(mapStateToProps)(ProfileClient);

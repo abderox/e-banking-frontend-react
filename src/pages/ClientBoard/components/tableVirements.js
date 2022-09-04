@@ -23,10 +23,11 @@ function TableC({ tableData , tableHead}) {
                         return (
                             <tr key={index}>
                                 <td>{index + 1}</td>
-                                <td>{data.intituleVirementBenificiaire}</td>
-                                <td>{data.nature}</td>
-                                <td>{data.nomBenificiaire}</td>
+                                <td>{data.ribEmetteur}</td>
                                 <td>{data.ribBenificiaire}</td>
+                                <td>{data.typeVirement}</td>
+                                <td>{data.montant}</td>
+                                <td>{data.dateExecution}</td>
                                 {/* <td><button className="refresh-button">action</button></td> */}
                             </tr>
                         )
