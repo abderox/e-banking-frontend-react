@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import ClientRegistration from './ClientRegistration';
 import AjouterCompte from './AjouterCompte';
-function ClientInfo() {
+function ClientInfoAfter() {
   const [key, setKey] = useState('client-register');
 
   return (
@@ -16,15 +15,20 @@ function ClientInfo() {
      
     >
       <Tab eventKey="client-register" title="Clients" tabClassName="tabs-color"> 
-        <ClientRegistration />
+        dateToFormat
       </Tab>
       <Tab eventKey="comptes" title="Comptes" tabClassName="tabs-color">
-        <AjouterCompte newAccount={true}/>
+        <AjouterCompte newAccount={false}/>
       </Tab>
-     
+      <Tab eventKey="Recherche" title="Recherche" tabClassName="tabs-color" >
+        data
+      </Tab>
+      <Tab eventKey="transactions" title="Transactions" tabClassName="tabs-color">
+        data
+      </Tab>
      
     </Tabs>
   );
 }
 
-export default ClientInfo;
+export default ClientInfoAfter;

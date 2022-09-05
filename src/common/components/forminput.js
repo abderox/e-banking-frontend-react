@@ -28,8 +28,15 @@ function FormInput(props) {
                 </div>
             </div>
             <hr />
+            <div className="form-row ">
+                    <div className="d-flex justify-content-center ">
+
+                        <h3 className="display-6 text-center font-weight-bold">Register client</h3>
+
+                    </div>
+                </div>
            
-            <div className="form-row row pt-3 mt-3">
+            <div className="form-row row pt-3 ">
                 <div className="col">
                     {/* <label>First Name</label> */}
                     <input id="1" type="text" onChange={props.handleChange} value={props.formInputData.firstName} name="firstName" className="form-control" placeholder="firstName" />

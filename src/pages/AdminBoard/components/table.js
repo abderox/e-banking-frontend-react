@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import SpinnerGrow from '../../../common/components/spinner'
 import CheckStatus from '../components/checkStatus'
 import ModalBoot from './modal';
+import ModalBootOtherAccount from './modalOtherAccount';
 import ToastError from '../../../common/components/toastError';
 import Toasts from '../../../common/components/toast';
 import { apiMessage } from "../../../store/actions";
@@ -68,7 +69,7 @@ function TableC(props) {
                         )}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="tbody-table">
                     {props.loading ? <tr><td colSpan={props.tableHead.length}><SpinnerGrow /></td></tr> :
                         props.tableData.map((data, index) => {
                             return (
@@ -81,7 +82,9 @@ function TableC(props) {
                                     <td><img src="https://img.icons8.com/material-outlined/24/40C057/crossed-out-date.png"  alt="img"/><span className="p-2 ">{data.createdAt.substring(0, 10)}</span></td>
                                     <td><CheckStatus type={mappingStatus.get(data.status)} status={data.status} /></td>
                                     <td>
-                                    <ModalBoot data={data.identifiantClient} key={index} handleRefresh={props.handleRefresh}/></td>
+                                    {props.newAccount ? <ModalBoot data={data.identifiantClient} key={index} handleRefresh={props.handleRefresh} /> :
+                                        <ModalBootOtherAccount data={data.identifiantClient} key={index} handleRefresh={props.handleRefresh} />
+                                    }</td>
                                 </tr>
                             )
                         })
@@ -106,6 +109,7 @@ const mapStateToProps = (state,ownedProps) => {
         codeAgence: state.auth.user.codeAgence,
         identifiant: state.auth.user.identifiantBanquier,
         bankName: state.auth.user.bankName,
+        newAccount: ownedProps.newAccount,
     }
 }
 const mapDispatchToProps = (dispatch) => {
