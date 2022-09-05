@@ -15,6 +15,7 @@ import ClientBoardContainer from './pages/ClientBoard/containers/ClientBoardCont
 import ProfileClient from './pages/ClientBoard/containers/profileClient';
 import AdminBoardContainer from './pages/AdminBoard/containers/AdminBoardContainer';
 import ClientInfo from './pages/AdminBoard/containers/ClientInfo';
+import ClientInfoAfter from './pages/AdminBoard/containers/ClientInfosAfter';
 import Error404 from './common/containers/404';
 import AdminProfile from './pages/ProfilePage/Containers/ProfileAdmin';
 import ClientBoard from './pages/ClientBoard/containers/ClientInfo';
@@ -29,7 +30,8 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="login-admin" element={<Login />} />
           <Route path="admin-board" element={<AdminBoardContainer />}>
-            <Route path="clients-operations" element={<ClientInfo />} />
+            <Route path="new-clients-operations" element={<ClientInfo />} />
+            <Route path="clients-operations" element={<ClientInfoAfter />} />
             <Route path="profile" element={<AdminProfile />} />
           </Route>
           <Route path="login" element={<LoginClient />} />

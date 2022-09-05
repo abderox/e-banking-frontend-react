@@ -10,15 +10,23 @@ const URL = ct.default;
 
 
 const registerClientService = (data) => {
-    return axios.post(URL.API_URL_V2 + URL.SIGN_UP_URL_CLIENT, data,  authHeader() );
-  };
+  return axios.post(URL.API_URL_V2 + URL.SIGN_UP_URL_CLIENT, data, authHeader());
+};
 
 const getClientsFoAccounts = async () => {
-    return await axios.get(URL.API_URL_V2 + "/get-recent-clients",  authHeader() );
-  };
+  return await axios.get(URL.API_URL_V2 + "/get-recent-clients", authHeader());
+};
+
+const getAllClientsOfAgence = async () => {
+  return await axios.get(URL.API_URL_V2 + "/get-clients-agence", authHeader());
+};
 
 const addFirstAccount = (data) => {
-    return axios.post(URL.API_URL_V2 + "/add-client-first-account", data,  authHeader() );
-  };
+  return axios.post(URL.API_URL_V2 + "/add-client-first-account", data, authHeader());
+};
 
-export  {registerClientService , getClientsFoAccounts , addFirstAccount};
+const addOtherAccount = (data) => {
+  return axios.post(URL.API_URL_V2 + "/add-client-account", data, authHeader());
+};
+
+export { registerClientService, getClientsFoAccounts, addFirstAccount, addOtherAccount ,getAllClientsOfAgence};
