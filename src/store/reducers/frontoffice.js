@@ -49,6 +49,18 @@ export default (state = initialState, action) => {
                     ...state,
                     transferCreated : false,
                 }
+            case type.CLEAR_TRANSFER_CREATED:
+                return {
+                    ...state,
+                    transferCreated : false,
+                }
+            case type.LOGOUT:
+                return {
+                    transferCreated : false,
+                    transactionsClient: [],
+                    benificiaresClient: [],
+                    accountsClient: [],
+                }
 
             default:
                 return state;

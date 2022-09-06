@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import ToastError from '../../../common/components/toastError';
 import Toasts from '../../../common/components/toast';
 import { apiMessage } from "../../../store/actions";
-import { addBenificiareToClient, makeTransferTo } from "../../../store/actions/frontoffice"
+import { addBenificiareToClient, makeTransferTo,cleartransferCreated } from "../../../store/actions/frontoffice"
 import { clearCreatedRes } from "../../../store/actions/backoffice"
 import authApi from '../../../api/auth/auth.api';
 import { logout } from "../../../store/actions/auth";
@@ -49,6 +49,11 @@ const MakeTransfer = (props) => {
     }
 
 
+    useEffect(() => {
+        props.cleartransferCreated();
+        props.clearMessage();
+    },[])
+
 
     const handleChange = (e) => {
 
@@ -83,6 +88,7 @@ const MakeTransfer = (props) => {
 
             setLoading(true);
             props.clearMessage();
+            props.cleartransferCreated();
             const newData = (data) => ([...data, formInputData])
          
             props.makeTransferTo(formInputData)
@@ -135,6 +141,7 @@ const mapDispatchToProps = (dispatch) => {
         clearCreatedRes: () => dispatch(clearCreatedRes()),
         logout: (url) => dispatch(logout(url)),
         makeTransferTo: (data) => dispatch(makeTransferTo(data)),
+        cleartransferCreated: () => dispatch(cleartransferCreated())
     }
 }
 

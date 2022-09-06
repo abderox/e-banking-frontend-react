@@ -29,6 +29,12 @@ export default (state = initialState, action) => {
             return {
                 createdSuccess : false
             }
+        case type.LOGOUT:
+            return {
+                createdSuccess : false,
+                createdClient: false
+            }
+
             
         default:
             return state;

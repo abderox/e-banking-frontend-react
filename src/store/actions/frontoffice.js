@@ -123,6 +123,13 @@ const makeTransferTo = (data) => (dispatch) => {
     })} 
 
 
+    const cleartransferCreated = ()=>{
+        return{
+            type:type.CLEAR_TRANSFER_CREATED
+        }
+    }
 
 
-export {addBenificiareToClient,getAccountsClient,getTransactionsClient,getBenificiaresClient,makeTransferTo};
+
+
+export {addBenificiareToClient,getAccountsClient,getTransactionsClient,getBenificiaresClient,makeTransferTo,cleartransferCreated};
