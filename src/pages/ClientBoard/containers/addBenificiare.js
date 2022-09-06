@@ -47,6 +47,8 @@ const AddBenificiare = (props) => {
     }
 
     useEffect(() => {
+        props.clearCreatedRes();
+        props.clearMessage();
         handleRefresh();
     }, [])
 

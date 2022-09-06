@@ -69,7 +69,7 @@ function TableC(props) {
                         )}
                     </tr>
                 </thead>
-                <tbody className="tbody-table">
+                <tbody >
                     {props.loading ? <tr><td colSpan={props.tableHead.length}><SpinnerGrow /></td></tr> :
                         props.tableData.map((data, index) => {
                             return (

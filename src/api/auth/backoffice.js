@@ -29,4 +29,8 @@ const addOtherAccount = (data) => {
   return axios.post(URL.API_URL_V2 + "/add-client-account", data, authHeader());
 };
 
+const updateAccount = (data) => {
+  return axios.post(URL.API_URL_V2 + "/update-client-account", data, authHeader());
+}
+
 export { registerClientService, getClientsFoAccounts, addFirstAccount, addOtherAccount ,getAllClientsOfAgence};
