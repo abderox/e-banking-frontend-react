@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from "react-validation/build/form";
 import { connect } from 'react-redux'
-import { required,montant_ } from '../../../utils/constraints'
+import { required, montant_ } from '../../../utils/constraints'
 
 
 
@@ -35,10 +35,10 @@ function FormInput(props) {
                         <select className="form-control" onChange={props.handleChange} name="ribEmetteur" required>
 
                             <option value="" >--Choose account--</option>
-                            {props.accountsClient.map((account, index) => 
-                                 (
-                                    <option key={index} value={account.ribCompte}>{account.ribCompte}{"  "} [{account.intituleCompte}]{"  "} {account.solde} {"  MAD"} </option>
-                                ))
+                            {props.accountsClient.map((account, index) =>
+                            (
+                                <option key={index} value={account.ribCompte}>{account.ribCompte}{"  "} [{account.intituleCompte}]{"  "} {account.solde} {"  MAD"} </option>
+                            ))
                             }
 
                         </select>
@@ -47,17 +47,18 @@ function FormInput(props) {
                     </div>
                     <div className="col">
                         <label>Receiver</label>
-                        <select className="form-control" onChange={props.handleChange} name="ribBenificiaire" required>
+                        <select className="form-control" onChange={props.handleChange} name="ribplusperiod" required>
 
-                            <option value="" >--Choose account--</option>
-                            {props.benificiaresClient.map((receiver, index) => 
-                                 (
-                                    <option key={index} value={receiver.ribBenificiaire}>{receiver.ribBenificiaire}{"  "} [{receiver.nomBenificiaire}]{"  "} {receiver.intituleVirementBenificiaire}  </option>
-                                ))
+                            <option value="B,O"  >--Choose account--</option>
+                            {props.benificiaresClient.map((receiver, index) =>
+                            (
+                                <option key={index} value={receiver.ribBenificiaire + "," + receiver.periodicity}>{receiver.ribBenificiaire}{"  "} [{receiver.nomBenificiaire}]{"  "} {receiver.intituleVirementBenificiaire} {" | "} {receiver.periodicity}  </option>
+                            ))
                             }
 
                         </select>
-                        {required(props.formInputData.ribBenificiaire)}
+                        <small className="text-muted">Format : rib [nom] title | periodicity</small>
+                        {required(props.formInputData.ribplusperiod)}
                     </div>
 
                 </div>
@@ -65,17 +66,31 @@ function FormInput(props) {
                 <div className="form-row row pt-2 ">
                     <div className="col">
                         <label>Montant</label>
-                        <input type="number" step="1" min="0" onChange={props.handleChange} value={props.formInputData.montant} name="montant" className="form-control" placeholder="0.00" title="montant" />
+                        <input type="number" step="0.1" min="0" onChange={props.handleChange} value={props.formInputData.montant} name="montant" className="form-control" placeholder="0.00" title="montant" />
                         {required(props.formInputData.montant)}
                         {montant_(props.formInputData.montant.toString())}
                     </div>
 
                     <div className="col">
-                        <label>Execution date</label>
+                        <label>{ props.formInputData.applyPeriodicity ?"Starting from " : "Execution date"}</label>
                         <input type="date" onChange={props.handleChange} value={props.formInputData.dateExecution} name="dateExecution" className="form-control" />
                         {required(props.formInputData.dateExecution)}
                     </div>
+
                 </div>
+                {props.formInputData.ribplusperiod.split(",")[1]!=='O' &&
+
+                    <div className="form-row row ">
+                        <div className=" col-lg-2 col-md-6 col-sm-12 pt-3 d-flex justify-content-between">
+                            <input className="form-check-input " type="checkbox" checked={props.formInputData.applyPeriodicity} id="flexCheckDefault" name="applyPeriodicity" onClick={props.handleCheck}  />
+                            <span className="" >
+                                Apply Periodicity 
+                            </span>
+                        </div>
+                        <small className="text-muted">Leaving it unchecked will make the transfer to happen once !</small>
+                    </div>
+                }
+
 
 
 
@@ -116,6 +131,7 @@ const mapToStateProps = (state, ownedProps) => {
         handleSubmit: ownedProps.handleSubmit,
         resetForm: ownedProps.resetForm,
         loading: ownedProps.loading,
+        handleCheck: ownedProps.handleCheck,
         accountsClient: state.frontoffice.accountsClient,
         benificiaresClient: state.frontoffice.benificiaresClient,
 

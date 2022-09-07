@@ -4,7 +4,7 @@ const initialState = {};
 export default (state = initialState, action) => {
 
     switch (action.type) {
-        
+
         case type.RESPONSE_POST:
             return {
                 createdClient: true
@@ -19,23 +19,31 @@ export default (state = initialState, action) => {
             }
         case type.CREATED_SUCCESS:
             return {
-                createdSuccess : true
+                createdSuccess: true
             }
         case type.CREATED_FAIL:
             return {
-                createdSuccess : false
+                createdSuccess: false
             }
         case type.CLEAR_CREATED:
             return {
-                createdSuccess : false
+                createdSuccess: false
             }
         case type.LOGOUT:
             return {
-                createdSuccess : false,
-                createdClient: false
+                createdSuccess: false,
+                createdClient: false,
+                accountsPerClient: []
+            }
+        case type.GET_ACCOUNTS_SUCCESS:
+            return {
+                accountsPerClient: action.payload
+            }
+        case type.GET_ACCOUNTS_FAIL:
+            return {
+                accountsPerClient: []
             }
 
-            
         default:
             return state;
     }

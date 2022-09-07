@@ -10,6 +10,7 @@ import { addBenificiareToClient, makeTransferTo,cleartransferCreated } from "../
 import { clearCreatedRes } from "../../../store/actions/backoffice"
 import authApi from '../../../api/auth/auth.api';
 import { logout } from "../../../store/actions/auth";
+import {montant_,rib} from "../../../utils/constraints"
 import * as type from '../../../utils/constants';
 const URL = type.default;
 
@@ -37,6 +38,8 @@ const MakeTransfer = (props) => {
             montant: '0',
             typeVirement: 'UNITAIRE',
             dateExecution: '',
+            applyPeriodicity:false,
+            ribplusperiod:'B,O'
 
         }
     );
@@ -62,11 +65,18 @@ const MakeTransfer = (props) => {
         setformInputData(newInput)
     }
 
+    let handleCheck = () => {
+        setformInputData({ ...formInputData, applyPeriodicity: !formInputData.applyPeriodicity  })
+    }
+
+
     const resetForm = () => {
         const emptyInput = {
-            ribEmetteur: '',
-            ribBenificiaire: '',
+            ribplusperiod: 'B,O',
+            typeVirement: 'UNITAIRE',
             montant: '0',
+            applyPeriodicity:false,
+
         }
         setformInputData(emptyInput)
     }
@@ -80,12 +90,34 @@ const MakeTransfer = (props) => {
             props.logout(URL.SIGN_OUT_URL_CLIENT);
             return <Navigate to={"/login"} replace />
         }
+
         formInputData.montant = parseFloat(formInputData.montant);
+        formInputData.applyPeriodicity = !(formInputData.ribplusperiod.split(',')[1]==='O') && formInputData.applyPeriodicity;
+        formInputData.ribBenificiaire = formInputData.ribplusperiod.split(',')[0];
+
         const checkEmptyInput = !Object.values(formInputData).some(el => el === '')
-        console.log(formInputData)
+        const inputsValidation =[];
 
-        if (checkEmptyInput && !props.jwtExpired) {
+        Object.entries(formInputData).forEach(([key,val])=>{
+            switch(key)
+            {
+                case "ribEmetteur":
+                    inputsValidation.push(/^[0-9]{24}$/.test(val))
+                    break;
+                case "ribBenificiaire":
+                    inputsValidation.push(/^[0-9]{24}$/.test(val))
+                    break;
+                case "montant":
+                    inputsValidation.push(/\d*$/.test(val))
+                    break;
+            }
+        })
 
+        console.log(inputsValidation)
+        if (checkEmptyInput && !props.jwtExpired && inputsValidation.every(el=>el===true)) {
+
+            console.log(formInputData)
+         
             setLoading(true);
             props.clearMessage();
             props.cleartransferCreated();
@@ -114,7 +146,7 @@ const MakeTransfer = (props) => {
                 <div className="row">
                     <div className="col-sm-12">
 
-                        <FormInput handleChange={handleChange} formInputData={formInputData} handleSubmit={handleSubmit} resetForm={resetForm} loading={loading} />
+                        <FormInput handleChange={handleChange} formInputData={formInputData} handleSubmit={handleSubmit} resetForm={resetForm} loading={loading} handleCheck={handleCheck} />
                         <TableC tableData={tableData} tableHead={headNames} />
                     </div>
                 </div>

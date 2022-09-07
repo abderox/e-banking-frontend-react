@@ -29,8 +29,14 @@ const addOtherAccount = (data) => {
   return axios.post(URL.API_URL_V2 + "/add-client-account", data, authHeader());
 };
 
+const getAccountsClient = (id,mobile) => {
+  let identity = id!='' ? `?identity=${id}` : '';
+  let mob = mobile!='' && id===''  ? `?telephone=${mobile}` : '';
+  return axios.get(URL.API_URL_V2 + `/get-accounts-client/${mob}${identity}`, authHeader());
+};
+
 const updateAccount = (data) => {
   return axios.post(URL.API_URL_V2 + "/update-client-account", data, authHeader());
 }
 
-export { registerClientService, getClientsFoAccounts, addFirstAccount, addOtherAccount ,getAllClientsOfAgence};
+export { registerClientService, getClientsFoAccounts, addFirstAccount, addOtherAccount ,getAllClientsOfAgence,getAccountsClient};
