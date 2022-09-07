@@ -1,5 +1,5 @@
 import * as type from './actionTypes';
-import { registerClientService, addFirstAccount, addOtherAccount } from '../../api/auth/backoffice';
+import { registerClientService, addFirstAccount, addOtherAccount ,getAccountsClient} from '../../api/auth/backoffice';
 
 const registerClient = (data) => (dispatch) => {
     return registerClientService(data).then(response => {
@@ -25,6 +25,8 @@ const registerClient = (data) => (dispatch) => {
     }
     );
 }
+
+
 
 
 
@@ -86,7 +88,33 @@ const addOtherAccountToClient = (data) => (dispatch) => {
     })
 }
 
+const getAccountsPerClient = (id,mobile) => (dispatch) => {
+    return getAccountsClient(id,mobile).then(response => {
+        dispatch({
+            type: type.GET_ACCOUNTS_SUCCESS,
+            payload: response.data
+        });
+
+        return Promise.resolve(response);
+
+    }, error => {
+        
+        const message = error.response.data || error;
+        dispatch({
+            type: type.GET_ACCOUNTS_FAIL,
+        }
+        )
+
+        dispatch({
+            type: type.SET_MESSAGE,
+            payload: message
+        });
+        return Promise.reject();
+
+    })
+}
 
 
 
-export { registerClient, clearCreatedClient, addFirstAccountToClient, clearCreatedRes, addOtherAccountToClient };
+
+export { registerClient, clearCreatedClient, addFirstAccountToClient, clearCreatedRes, addOtherAccountToClient,getAccountsPerClient };

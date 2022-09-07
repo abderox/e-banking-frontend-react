@@ -391,3 +391,8 @@ font-weight: bold;
   max-height: 420px;
   overflow-y: scroll;
 }
+
+.max-height-bn-table{
+  max-height: 380px;
+  overflow-y: scroll;
+}

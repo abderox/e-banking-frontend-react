@@ -23,10 +23,11 @@ const AddBenificiare = (props) => {
 
     const headNames = [
         "N°",
-        "intitule virement",
-        "nature",
+        "Intitule virement",
+        "Nature",
         "Nom beneficiaire",
         "RIB",
+        "Periodicity"
     ]
 
     const [formInputData, setformInputData] = useState(
@@ -34,7 +35,8 @@ const AddBenificiare = (props) => {
             intituleVirement: '',
             nom: '',
             rib: '',
-            nature: 'DOMESTIQUE'
+            nature: 'DOMESTIQUE',
+            periodicity:'O'
 
         }
     );
@@ -151,7 +153,7 @@ const AddBenificiare = (props) => {
 
     }
     return (
-        <React.Fragment>
+        <>
             <div className="container mt-5 ">
                 {props.message && <ToastError props={JSON.parse(props.message)} isdarkMode={true} />}
                 {props.created && <Toasts props={toast} isdarkMode={props.isdarkMode} />}
@@ -165,11 +167,13 @@ const AddBenificiare = (props) => {
                                 <button type="button" className="refresh-button" onClick={handleRefreshButton}><img src="https://img.icons8.com/sf-black-filled/28/FFFFFF/recurring-appointment.png" alt="refresh" /></button>
                             </div>
                         </div>
+                        <div className="row  justify-content-between d-flex overflow-auto max-height-bn-table ">
                         <TableC tableData={tableData} tableHead={headNames} />
+                        </div>
                     </div>
                 </div>
             </div>
-        </React.Fragment>
+        </>
     );
 };
 
