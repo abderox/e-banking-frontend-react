@@ -3,6 +3,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import AjouterCompte from './AjouterCompte';
 import CompteService from './MajAccount';
+import ClientOperations from './clientsOperations';
 
 function ClientInfoAfter() {
   const [key, setKey] = useState('comptes');
@@ -17,7 +18,7 @@ function ClientInfoAfter() {
      
     >
       <Tab eventKey="client-register" title="Clients" tabClassName="tabs-color"> 
-        dateToFormat
+        <ClientOperations />
       </Tab>
       <Tab eventKey="comptes" title="Comptes" tabClassName="tabs-color">
         <AjouterCompte newAccount={false}/>

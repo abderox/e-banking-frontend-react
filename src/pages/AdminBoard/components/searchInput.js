@@ -1,11 +1,11 @@
 import React from 'react'
 
-const SearchInput = ({ handleChangeSearch, value, handleChangeSearchE, valueE, valueS, handleChangeSearchS }) => {
+const SearchInput = ({ handleChangeSearch, value, handleChangeSearchE, valueE, valueS, handleChangeSearchS ,title}) => {
     return (
         <div className="p-4 border bg-color-div" >
             <div className="d-flex justify-content-center ">
 
-                <h3 className="display-6 text-center font-weight-bold">Add Account</h3>
+                <h3 className="display-6 text-center font-weight-bold">{title ? title : "Add Account" }</h3>
 
             </div>
 

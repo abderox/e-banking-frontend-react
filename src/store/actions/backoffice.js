@@ -1,5 +1,14 @@
 import * as type from './actionTypes';
-import { registerClientService, addFirstAccount, addOtherAccount, getAccountsClient,updateAccount_ } from '../../api/auth/backoffice';
+
+import {
+    registerClientService,
+    addFirstAccount,
+    addOtherAccount,
+    getAccountsClient,
+    updateAccount_,
+    getAllClientsOfAgence,
+    editClient
+} from '../../api/auth/backoffice';
 
 const registerClient = (data) => (dispatch) => {
     return registerClientService(data).then(response => {
@@ -121,20 +130,20 @@ const clearDisplayedAccounts = () => {
 }
 
 
-const updateAccount = (data)=>(dispatch)=>{
-    return updateAccount_(data).then(response=>{
+const updateAccount = (data) => (dispatch) => {
+    return updateAccount_(data).then(response => {
         dispatch({
-            type:type.UPDATE_ACCOUNT_SUCCESS,
+            type: type.UPDATE_ACCOUNT_SUCCESS,
         });
         return Promise.resolve(response);
-    },error=>{
+    }, error => {
         const message = error.response.data || error;
         dispatch({
-            type:type.UPDATE_ACCOUNT_FAIL,
+            type: type.UPDATE_ACCOUNT_FAIL,
         });
         dispatch({
-            type:type.SET_MESSAGE,
-            payload:message
+            type: type.SET_MESSAGE,
+            payload: message
         });
         return Promise.reject();
     })
@@ -142,9 +151,57 @@ const updateAccount = (data)=>(dispatch)=>{
 }
 
 
-const clearUpdatedAccount = ()=>{
+const clearUpdatedAccount = () => {
     return {
-        type:type.CLEAR_UPDATED_ACCOUNT,
+        type: type.CLEAR_UPDATED_ACCOUNT,
+    }
+}
+
+
+const getClientsOfAgence = () => (dispatch) => {
+    return getAllClientsOfAgence().then(response => {
+        dispatch({
+            type: type.GET_CLIENTS_SUCCESS,
+            payload: response.data
+        });
+        return Promise.resolve(response);
+    }, error => {
+        const message = error.response.data || error;
+        dispatch({
+            type: type.GET_CLIENTS_FAIL,
+        });
+        dispatch({
+            type: type.SET_MESSAGE,
+            payload: message
+        });
+        
+        return Promise.reject();
+    })
+}
+
+const editClient_ = (data) => (dispatch) => {
+    return editClient(data).then(response => {
+        dispatch({
+            type: type.EDIT_CLIENT_SUCCESS,
+        });
+        return Promise.resolve(response);
+    }, error => {
+        const message = error.response.data || error;
+        dispatch({
+            type: type.EDIT_CLIENT_FAIL,
+        });
+        dispatch({
+            type: type.SET_MESSAGE,
+            payload: message
+        });
+        return Promise.reject();
+    })
+
+}
+
+const clearEditClientResponse = () => {
+    return {
+        type: type.CLEAR_EDIT_CLIENT_RESPONSE,
     }
 }
 
@@ -161,5 +218,8 @@ export {
     getAccountsPerClient,
     clearDisplayedAccounts,
     updateAccount,
-    clearUpdatedAccount
+    clearUpdatedAccount,
+    getClientsOfAgence,
+    editClient_,
+    clearEditClientResponse
 };

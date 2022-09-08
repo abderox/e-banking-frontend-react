@@ -33,7 +33,7 @@ const CompteService = (props) => {
         "Action"
     ];
 
-     
+
     const toast = {
         title: "success",
         body: "Account updated successfully !",
@@ -124,7 +124,7 @@ const mapStateToProps = (state) => {
     return {
         accountsClient: state.backoffice.accountsPerClient,
         message: state.message.message,
-        updatedAccount : state.backoffice.updatedAccount,
+        updatedAccount: state.backoffice.updatedAccount,
         isdarkMode: state.darkMode.isdarkMode,
     }
 }
