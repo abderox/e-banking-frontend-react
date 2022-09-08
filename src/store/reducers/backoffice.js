@@ -1,6 +1,6 @@
 import * as type from '../actions/actionTypes';
 
-const initialState = {accountsPerClient: []};
+const initialState = { accountsPerClient: [], clients: [] };
 export default (state = initialState, action) => {
 
     switch (action.type) {
@@ -59,8 +59,26 @@ export default (state = initialState, action) => {
             return {
                 updatedAccount: false
             }
-            
-
+        case type.GET_CLIENTS_SUCCESS:
+            return {
+                clients: action.payload
+            }
+        case type.GET_CLIENTS_FAIL:
+            return {
+                clients: []
+            }
+        case type.EDIT_CLIENT_SUCCESS:
+            return {
+                editedClient: true
+            }
+        case type.EDIT_CLIENT_FAIL:
+            return {
+                editedClient: false
+            }
+        case type.CLEAR_EDIT_CLIENT_RESPONSE:
+            return {
+                editedClient: false
+            }
 
         default:
             return state;

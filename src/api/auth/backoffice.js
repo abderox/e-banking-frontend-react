@@ -39,6 +39,10 @@ const updateAccount_ = (data) => {
   return axios.post(URL.API_URL_V2 + "/update-account", data, authHeader());
 }
 
+const editClient = (data) => {
+  return axios.post(URL.API_URL_V2 + "/edit-client", data, authHeader());
+}
+
 export {
   registerClientService,
   getClientsFoAccounts,
@@ -46,5 +50,6 @@ export {
   addOtherAccount,
   getAllClientsOfAgence,
   getAccountsClient,
-  updateAccount_
+  updateAccount_,
+  editClient
 };

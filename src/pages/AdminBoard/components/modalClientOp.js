@@ -5,28 +5,20 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { connect } from 'react-redux';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { montant_ } from '../../../utils/constraints';
-import { addOtherAccountToClient, clearCreatedRes } from '../../../store/actions/backoffice';
 import { apiMessage } from "../../../store/actions";
+import { editClient_, clearEditClientResponse } from '../../../store/actions/backoffice'
 import authApi from '../../../api/auth/auth.api';
 
 
-function ModalBootOtherAccount(props) {
-
+function ModalClientOP(props) {
 
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
 
-
-
-
     const [dataTosend, setDataTosend] = useState(
         {
-            identifiantClient: props.data,
-            inclusVirement: false,
-            solde: 0.00,
-            typeCompte: "COMPTE_EPARGNE",
-       
+            identifiantClient: props.data.identifiantClient,
+            statusClient: props.data.status
         })
 
 
@@ -38,7 +30,7 @@ function ModalBootOtherAccount(props) {
         e.preventDefault();
 
 
-        if (authApi.NotvalidJwt() ) {
+        if (authApi.NotvalidJwt()) {
             alert("Your session has expired, please login again")
             props.logout(URL.SIGN_OUT_URL_ADMIN);
             return <Navigate to={"/login-admin"} replace />
@@ -46,26 +38,21 @@ function ModalBootOtherAccount(props) {
 
         setLoading(true);
 
-        dataTosend.solde = parseFloat(dataTosend.solde)
+
 
         let checkAll = Object.values(dataTosend).every(el => el !== null && el !== undefined && el !== "");
         if (checkAll) {
-            props.clearCreatedRes();
+
             props.clearMessage();
             console.log(dataTosend)
-            props.addOtherAccountToClient(dataTosend)
-                .then(res => {
-                    console.log(res)
-                    setLoading(false);
-                    handleClose();
-                    props.handleRefresh();
-                }).catch(err => {
-                    console.log(err)
-                    setLoading(false);
-                    handleClose();
-                }
-                );
-
+            props.editClient_(dataTosend).then(res => {
+                console.log(res)
+                setLoading(false);
+                handleClose();
+                props.handleRefresh();
+            }).catch(err => {
+                setLoading(false);
+            })
 
         } else {
             console.log("not ok")
@@ -74,15 +61,10 @@ function ModalBootOtherAccount(props) {
 
     }
 
-    let handleChange = (e) => {
+    const handleChange = (e) => {
         let val = e.target.value;
         setDataTosend({ ...dataTosend, [e.target.name]: val })
     }
-
-    let handleCheck = () => {
-        setDataTosend({ ...dataTosend, inclusVirement: !dataTosend.inclusVirement })
-    }
-
 
 
     return (
@@ -98,7 +80,7 @@ function ModalBootOtherAccount(props) {
 
                 {!loading ?
                     <Modal.Header closeButton>
-                        <Modal.Title>New account</Modal.Title>
+                        <Modal.Title>Client service</Modal.Title>
                     </Modal.Header> :
                     <Modal.Header >
                         <Modal.Title>Please wait  ... </Modal.Title>
@@ -108,37 +90,30 @@ function ModalBootOtherAccount(props) {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Identifiant client</Form.Label>
-                            <input type="text" className="form-control" value={props.data} disabled name="identifiantClient" />
+                            <input type="text" className="form-control" value={props.data.identifiantClient} disabled name="identifiantClient" />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Type compte</Form.Label>
-                            <select className="form-control" name="typeCompte" onChange={handleChange}>
-                                <option value="">--select type--</option>
-                                <option value="COMPTE_COURANT">Compte courant</option>
-                                <option value="COMPTE_RATACHE">Compte rataché</option>
-                                <option value="COMPTE_EPARGNE">Compte épargne</option>
-                            </select>
-                          
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                            <div className="form-check">
-                                <input className="form-check-input p-2" type="checkbox" checked={dataTosend.inclusVirement} id="flexCheckDefault" name="inclusVirement" onClick={handleCheck} />
-                                <span className="" htmlFor="flexCheckDefault">
-                                    Inclus virement
-                                </span>
-                            </div>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                            <Form.Label>Montant</Form.Label>
-                            <InputGroup className="mb-3">
-                                <InputGroup.Text>MAD</InputGroup.Text>
-                                <input type="text" className="form-control" placeholder="Solde initial" name="solde" value={dataTosend.solde} onChange={handleChange} />
-                                <InputGroup.Text>.00</InputGroup.Text>
-                            </InputGroup>
-                            {montant_(dataTosend.solde.toString())}
 
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Current status </Form.Label>
+                            <input type="text" className="form-control" value={props.data.status} disabled name="statusClient" />
                         </Form.Group>
-                       
+
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlTextarea1"
+                        >
+                            <Form.Label>Change status</Form.Label>
+                            <select className="form-control" name="statusClient" onChange={handleChange} required>
+
+                                <option value="DESACTIVE" defaultValue={"DESACTIVE"}>--Status--</option>
+                                <option value="DESACTIVE" >DESACTIVE</option>
+                                <option value="ACTIVE" >ACTIVE</option>
+                                <option value="SUSPENDU" >SUSPENDU</option>
+                                <option value="BLOQUE" >BLOQUE</option>
+
+
+                            </select>
+                        </Form.Group>
                         <Modal.Footer>
                             {!loading &&
                                 <Button variant="secondary" onClick={handleClose} >
@@ -152,7 +127,7 @@ function ModalBootOtherAccount(props) {
                                         <span style={{ marginLeft: 5 }}>Submiting ...</span>
                                     </>
                                 ) :
-                                    <span>Confirm</span>
+                                    <span>Update</span>
                                 }
                             </Button>
                         </Modal.Footer>
@@ -174,10 +149,10 @@ const mapStateToProps = (state, ownedProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addOtherAccountToClient: (data) => dispatch(addOtherAccountToClient(data)),
         clearMessage: () => dispatch(apiMessage.clearMessage()),
-        clearCreatedRes: () => dispatch(clearCreatedRes()),
+        editClient_: (data) => dispatch(editClient_(data)),
+        clearEditClientResponse: () => dispatch(clearEditClientResponse())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalBootOtherAccount);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalClientOP);

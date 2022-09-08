@@ -9,7 +9,7 @@ import ToastError from '../../../common/components/toastError';
 import Toasts from '../../../common/components/toast';
 import { apiMessage } from "../../../store/actions";
 import {  clearCreatedRes } from '../../../store/actions/backoffice';
-
+import ModalClientOP from './modalClientOp';
 
 function TableC(props) {
 
@@ -82,9 +82,10 @@ function TableC(props) {
                                     <td><img src="https://img.icons8.com/material-outlined/24/40C057/crossed-out-date.png"  alt="img"/><span className="p-2 ">{data.createdAt.substring(0, 10)}</span></td>
                                     <td><CheckStatus type={mappingStatus.get(data.status)} status={data.status} /></td>
                                     <td>
-                                    {props.newAccount ? <ModalBoot data={data.identifiantClient} key={index} handleRefresh={props.handleRefresh} /> :
-                                        <ModalBootOtherAccount data={data.identifiantClient} key={index} handleRefresh={props.handleRefresh} />
+                                    { !props.clientOption ? (props.newAccount  ? <ModalBoot data={data.identifiantClient} key={index} handleRefresh={props.handleRefresh} /> :
+                                        <ModalBootOtherAccount data={data.identifiantClient} key={index} handleRefresh={props.handleRefresh} />) : <ModalClientOP  data={data} key={index} handleRefresh={props.handleRefresh} />
                                     }</td>
+                                  
                                 </tr>
                             )
                         })
@@ -103,6 +104,7 @@ const mapStateToProps = (state,ownedProps) => {
         tableData: ownedProps.tableData,
         tableHead: ownedProps.tableHead,
         handleRefresh: ownedProps.handleRefresh,
+        clientOption: ownedProps.clientOp,
         created : state.backoffice.createdSuccess,
         message : state.message.message,
         isdarkMode : state.darkMode.isdarkMode,
