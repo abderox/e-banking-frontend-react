@@ -1,5 +1,5 @@
 import * as type from './actionTypes';
-import { registerClientService, addFirstAccount, addOtherAccount ,getAccountsClient} from '../../api/auth/backoffice';
+import { registerClientService, addFirstAccount, addOtherAccount, getAccountsClient,updateAccount_ } from '../../api/auth/backoffice';
 
 const registerClient = (data) => (dispatch) => {
     return registerClientService(data).then(response => {
@@ -88,8 +88,8 @@ const addOtherAccountToClient = (data) => (dispatch) => {
     })
 }
 
-const getAccountsPerClient = (id,mobile) => (dispatch) => {
-    return getAccountsClient(id,mobile).then(response => {
+const getAccountsPerClient = (id, mobile) => (dispatch) => {
+    return getAccountsClient(id, mobile).then(response => {
         dispatch({
             type: type.GET_ACCOUNTS_SUCCESS,
             payload: response.data
@@ -98,7 +98,7 @@ const getAccountsPerClient = (id,mobile) => (dispatch) => {
         return Promise.resolve(response);
 
     }, error => {
-        
+
         const message = error.response.data || error;
         dispatch({
             type: type.GET_ACCOUNTS_FAIL,
@@ -114,7 +114,52 @@ const getAccountsPerClient = (id,mobile) => (dispatch) => {
     })
 }
 
+const clearDisplayedAccounts = () => {
+    return {
+        type: type.CLEAR_DISPLAYED_ACCOUNTS,
+    }
+}
+
+
+const updateAccount = (data)=>(dispatch)=>{
+    return updateAccount_(data).then(response=>{
+        dispatch({
+            type:type.UPDATE_ACCOUNT_SUCCESS,
+        });
+        return Promise.resolve(response);
+    },error=>{
+        const message = error.response.data || error;
+        dispatch({
+            type:type.UPDATE_ACCOUNT_FAIL,
+        });
+        dispatch({
+            type:type.SET_MESSAGE,
+            payload:message
+        });
+        return Promise.reject();
+    })
+
+}
+
+
+const clearUpdatedAccount = ()=>{
+    return {
+        type:type.CLEAR_UPDATED_ACCOUNT,
+    }
+}
 
 
 
-export { registerClient, clearCreatedClient, addFirstAccountToClient, clearCreatedRes, addOtherAccountToClient,getAccountsPerClient };
+
+
+export {
+    registerClient,
+    clearCreatedClient,
+    addFirstAccountToClient,
+    clearCreatedRes,
+    addOtherAccountToClient,
+    getAccountsPerClient,
+    clearDisplayedAccounts,
+    updateAccount,
+    clearUpdatedAccount
+};

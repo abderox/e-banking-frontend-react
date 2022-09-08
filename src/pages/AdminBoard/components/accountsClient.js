@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import SpinnerGrow from '../../../common/components/spinner'
 import CheckStatus from './checkStatus'
 import ToastError from '../../../common/components/toastError';
-import Toasts from '../../../common/components/toast';
+import ModalBoot from './modalAccountOperations'
 
 
 function TableC(props) {
@@ -14,13 +14,7 @@ function TableC(props) {
     const mappingStatus = new Map();
     mappingStatus.set(false, "success");
     mappingStatus.set(true, "danger");
-   
-    const toast = {
-        title: "success",
-        body: "Account created successfully !",
-        position: "top-center",
-        place: "toast-position"
-    }
+  
 
    
   
@@ -55,7 +49,7 @@ function TableC(props) {
                                     <td>{data.intituleCompte}</td>
                                     <td>{data.solde}</td>
                                     <td><CheckStatus type={mappingStatus.get(data.bloqued)} status={data.bloqued?"Yes":"No"} /></td>
-                                    <td>action</td>
+                                    <td><ModalBoot data={data} key={index} /> </td>
                                    
                                 </tr>
                             )
