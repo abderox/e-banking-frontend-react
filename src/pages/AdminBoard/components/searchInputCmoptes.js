@@ -21,7 +21,7 @@ function SearchInput(props) {
 
                     </div>
                     <div className="col">
-
+                    <label className="text-muted">Agence : <strong >#{props.codeAgence}</strong></label>
                     </div>
                     <div className="col">
                         <label className="text-muted">ID Banker : #<strong>{props.identifiant}</strong></label>
@@ -44,16 +44,24 @@ function SearchInput(props) {
                     </div>
                 </div>
 
+                  <div className="form-group row mt-2">
+                  <div className="col-12 justify-content-center d-flex">
+                        <label className="text-muted"><strong>Filter by</strong></label>
+
+                    </div>
+                  <div className="col">
+                          <label>Rib</label>
+                          <input type="text" onChange={props.handleChange} value={props.formInputData.ribCompte} name="ribCompte" className="form-control" placeholder="11110000...0001460" disabled={props.disabled} />
+               
+                      </div>
+                      <div className="col">
+                          <label>Account title</label>
+                          <input type="text" onChange={props.handleChange} value={props.formInputData.intituleCompte} name="intituleCompte" className="form-control" placeholder="courant"  disabled={props.disabled} />
+               
+                      </div>
+                  </div>
                 
               
-
-                <div className="form-group row">
-                <div className="col">
-                        <label>Rib</label>
-                        <input type="text" onChange={props.handleChange} value={props.formInputData.ribCompte} name="rib" className="form-control" placeholder="11110000...0001460" />
-             
-                    </div>
-                </div>
 
                 <div className="row mt-4">
                     <div className="col-lg-3 col-md-4 col-sm-12 pt-4">
@@ -87,11 +95,13 @@ const mapToStateProps = (state, ownedProps) => {
         codeAgence: state.auth.user.codeAgence,
         identifiant: state.auth.user.identifiantBanquier,
         bankName: state.auth.user.bankName,
+        disabled: ownedProps.disabled,
         formInputData: ownedProps.formInputData,
         handleChange: ownedProps.handleChange,
         handleSubmit: ownedProps.handleSubmit,
         resetForm: ownedProps.resetForm,
         loading: ownedProps.loading,
+
     }
 }
 export default connect(mapToStateProps)(SearchInput);
