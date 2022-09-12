@@ -5,6 +5,7 @@ import TableC from "../components/table";
 import { connect } from "react-redux";
 import ToastError from '../../../common/components/toastError';
 import Toasts from '../../../common/components/toast';
+import SpinnerGrow from '../../../common/components/spinner'
 import { apiMessage } from "../../../store/actions";
 import { addBenificiareToClient, getBenificiaresClient } from "../../../store/actions/frontoffice"
 import { clearCreatedRes } from "../../../store/actions/backoffice"
@@ -18,6 +19,7 @@ const AddBenificiare = (props) => {
 
 
     const [loading, setLoading] = useState(false);
+    const [loading_, setLoading_] = useState(false);
     const [tableData, setTableData] = useState([])
 
 
@@ -27,7 +29,8 @@ const AddBenificiare = (props) => {
         "Nature",
         "Nom beneficiaire",
         "RIB",
-        "Periodicity"
+        "Periodicity",
+        "Action"
     ]
 
     const [formInputData, setformInputData] = useState(
@@ -36,7 +39,7 @@ const AddBenificiare = (props) => {
             nom: '',
             rib: '',
             nature: 'DOMESTIQUE',
-            periodicity:'O'
+            periodicity: 'O'
 
         }
     );
@@ -51,36 +54,41 @@ const AddBenificiare = (props) => {
     useEffect(() => {
         props.clearCreatedRes();
         props.clearMessage();
-        handleRefresh();
+        if (props.benificiaresClient.length === 0) {
+            handleRefresh();
+        }
+        else {
+            setTableData(props.benificiaresClient);
+        }
     }, [])
 
 
 
 
     let handleRefresh = () => {
-
-        setLoading(true);
+        console.log("refreshing");
+        setLoading_(true);
 
         props.getBenificiaresClient().then((res) => {
             setTableData(res.data);
-            setLoading(false);
+            setLoading_(false);
         }).catch((err) => {
             console.log(err);
-            setLoading(false);
+            setLoading_(false);
         })
 
     }
 
-    let handleRefreshButton = () => {
+    // let handleRefreshButton = () => {
 
-        if (props.benificiaresClient.length === 0) {
-            handleRefresh();
-        }
-        else {
-            setTableData(props.benificiaresClient);
-            setLoading(false);
-        }
-    }
+    //     if (props.benificiaresClient.length === 0) {
+    //         handleRefresh();
+    //     }
+    //     else {
+    //         setTableData(props.benificiaresClient);
+    //         setLoading(false);
+    //     }
+    // }
 
 
 
@@ -164,11 +172,18 @@ const AddBenificiare = (props) => {
                         <FormInput handleChange={handleChange} formInputData={formInputData} handleSubmit={handleSubmit} resetForm={resetForm} loading={loading} />
                         <div className="row ">
                             <div className="col-md-2">
-                                <button type="button" className="refresh-button" onClick={handleRefreshButton}><img src="https://img.icons8.com/sf-black-filled/28/FFFFFF/recurring-appointment.png" alt="refresh" /></button>
+                                <button type="button" className="refresh-button" onClick={handleRefresh}><img src="https://img.icons8.com/sf-black-filled/28/FFFFFF/recurring-appointment.png" alt="refresh" /></button>
                             </div>
                         </div>
                         <div className="row  justify-content-between d-flex overflow-auto max-height-bn-table ">
-                        <TableC tableData={tableData} tableHead={headNames} />
+
+                            {loading_ ?
+                                <div className="d-block justify-content-center align-content-center mt-5">
+                                    <SpinnerGrow />
+                                </div>
+                                :
+                                <TableC tableData={tableData} tableHead={headNames} handleRefresh={handleRefresh} />
+                            }
                         </div>
                     </div>
                 </div>
@@ -177,7 +192,7 @@ const AddBenificiare = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownedProps) => {
     return {
         user: state.auth.user,
         created: state.backoffice.createdSuccess,

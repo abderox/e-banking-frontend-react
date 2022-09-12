@@ -24,4 +24,15 @@ const makeTransfer = (data) => {
   return axios.post(URL.API_URL_V2 + "/make-transfer", data, authHeader());
 }
 
-export { addBenificiare, getAccounts ,getTransactions,getBenificiares,makeTransfer};
+const editBenificiare = (data) => {
+  return axios.post(URL.API_URL_V2 + "/edit-benificiary", data, authHeader());
+}
+
+export {
+  addBenificiare,
+  getAccounts,
+  getTransactions,
+  getBenificiares,
+  makeTransfer,
+  editBenificiare
+};
