@@ -1,8 +1,18 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table';
+import ModalBoot from './modal'
+import CheckStatus from '../../../common/components/checkStatus';
 
+function TableC({ tableData , tableHead,handleRefresh}) {
 
-function TableC({ tableData , tableHead}) {
+    const mapping = new Map();
+    mapping.set("M", ["monthly","success"]);
+    mapping.set("W", ["weekly","info"]);
+    mapping.set("D", ["daily","warning"]);
+    mapping.set("A", ["yearly","dark"]);
+    mapping.set("O", ["once","danger"]);
+    mapping.set("F", ["fortnightly","secondary"]);
+
     return (
 
 
@@ -27,8 +37,8 @@ function TableC({ tableData , tableHead}) {
                                 <td>{data.nature}</td>
                                 <td>{data.nomBenificiaire}</td>
                                 <td>{data.ribBenificiaire}</td>
-                                <td>{data.periodicity}</td>
-                                {/* <td><button className="refresh-button">action</button></td> */}
+                                <td><CheckStatus status={mapping.get(data.periodicity)[0]} type={mapping.get(data.periodicity)[1]} /></td>
+                                <td><ModalBoot data={data} key={index} handleRefresh={handleRefresh} mapping={mapping} /></td>
                             </tr>
                         )
                     })
