@@ -8,6 +8,8 @@ import { handledarkMode } from '../../store/actions/darkMode';
 const Switchtoggle = (props) => {
 
 
+    const styleDarkMode = props.currentUser ? {}: {marginTop : "10px"};
+
 
     const switchDarkMode = () => {
         props.handledarkMode(!props.isdarkMode);
@@ -22,7 +24,7 @@ const Switchtoggle = (props) => {
 
     return (
         <>
-            <div id="darkmode">
+            <div id="darkmode" style={styleDarkMode}>
                 <input type="checkbox" className="checkbox" id="checkbox"
                     onChange={switchDarkMode}
                     checked={props.isdarkMode}
@@ -39,7 +41,9 @@ const Switchtoggle = (props) => {
 
 const mapStateToProps = state => {
     return {
-        isdarkMode: state.darkMode.isdarkMode
+        isdarkMode: state.darkMode.isdarkMode,
+        currentUser: state.auth.user,
+
     }
 }
 

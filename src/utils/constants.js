@@ -7,9 +7,18 @@ const SIGN_OUT_URL_ADMIN = "/auth/sign-out-admin";
 const SIGN_IN_URL_CLIENT = "/sign-in-client";
 const SIGN_OUT_URL_CLIENT = "/auth/sign-out-client";
 const SIGN_UP_URL_CLIENT = "/auth/register-client";
+const UPDATE_PASSWORD = "/auth/update-password";
+const SEND_OTP = "/auth/send-otp"
 
 export default {
-    API_URL_V1, API_URL_V2,
-    AUTH_BASE_URL, SIGN_IN_URL_ADMIN,
-    SIGN_OUT_URL_ADMIN, SIGN_IN_URL_CLIENT, SIGN_OUT_URL_CLIENT, SIGN_UP_URL_CLIENT
+    API_URL_V1,
+    API_URL_V2,
+    AUTH_BASE_URL,
+    SIGN_IN_URL_ADMIN,
+    SIGN_OUT_URL_ADMIN,
+    SIGN_IN_URL_CLIENT,
+    SIGN_OUT_URL_CLIENT,
+    SIGN_UP_URL_CLIENT,
+    UPDATE_PASSWORD,
+    SEND_OTP
 };

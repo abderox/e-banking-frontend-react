@@ -274,7 +274,8 @@ perspective: 1000px;
 }
 
 .tabs-color{
-  color: #fd7921 !important;; 
+  color: #fd7921 !important;
+  font-size: 1rem !important;
   font-weight: bold !important;
 }
 
@@ -307,7 +308,6 @@ perspective: 1000px;
   background-color: #fd5f21;
   border: none;
   top: 0px;
-  margin: 10px;
 }
 th, td {
 
@@ -395,4 +395,19 @@ font-weight: bold;
 .max-height-bn-table{
   max-height: 330px;
   overflow-y: scroll;
+}
+
+.badge{
+  font-size: 0.8rem !important;
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
 }

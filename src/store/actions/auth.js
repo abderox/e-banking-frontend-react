@@ -2,7 +2,7 @@ import * as type from './actionTypes';
 import AuthApi from '../../api/auth/auth.api';
 
 
- const login = (username, password, url) => (dispatch) => {
+const login = (username, password, url) => (dispatch) => {
     return AuthApi.login(username, password, url).then((response) => {
         dispatch({
             type: type.LOGIN_SUCCESS,
@@ -12,13 +12,13 @@ import AuthApi from '../../api/auth/auth.api';
     },
         (error) => {
             const message = error.response.data || error;
-               
+
             dispatch({
                 type: type.LOGIN_FAIL,
             })
             dispatch({
                 type: type.SET_MESSAGE,
-                payload:  message 
+                payload: message
             });
 
             return Promise.reject(error);
@@ -26,7 +26,7 @@ import AuthApi from '../../api/auth/auth.api';
     );
 }
 
- const logout = (url) => (dispatch) => {
+const logout = (url) => (dispatch) => {
     AuthApi.logout(url);
     dispatch({
         type: type.LOGOUT,
@@ -51,11 +51,41 @@ const setIsClient = () => {
     }
 }
 
+const sendOtp = () => (dispatch) => {
+    return AuthApi.sendOtp().then((response) => {
+        dispatch({
+            type: type.SEND_OTP_SUCCESS,
+            payload: response.data
+        });
+        return Promise.resolve();
+    },
+        (error) => {
+            const message = error.response.data || error;
+            dispatch({
+                type: type.SEND_OTP_FAIL,
+            })
+            dispatch({
+                type: type.SET_MESSAGE,
+                payload: message
+            });
+
+            return Promise.reject(error);
+        })
+}
 
 const reload =
     () => (dispatch) => {
         dispatch({
             type: type.MISSING_DATA,
-        });}
+        });
+    }
 
-export  {login, logout,reload, setJwtExpired, setIsAdmin,setIsClient};
+export {
+    login,
+    logout,
+    reload,
+    setJwtExpired,
+    setIsAdmin,
+    setIsClient,
+    sendOtp
+};
