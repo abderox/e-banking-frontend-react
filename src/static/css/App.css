@@ -411,3 +411,42 @@ font-weight: bold;
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
 }
+
+.otpContainer {
+  margin: 5% auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.otpInput {
+  width: 3rem !important;
+  height: 3rem;
+  margin: 0 0.5rem;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.Verify{
+  margin : 5% auto;
+  width: 3rem !important;
+  height: 3rem;
+  background-color: #fd5f21;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.Verify:hover{
+  background-color: #02af02;
+  transition: all 0.2s ease-in-out;
+}

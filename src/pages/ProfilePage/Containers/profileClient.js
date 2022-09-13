@@ -17,8 +17,6 @@ const ProfileClient = (props) => {
 
     <PersonalProfile />
 
-    
-
   )
 }
 

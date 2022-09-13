@@ -58,6 +58,10 @@ const sendOtp = () => {
     return axios.get(URL.API_URL_V2 + URL.SEND_OTP, authHeader());
 }
 
+const verifyOtp = (data) => {
+    return axios.post(URL.API_URL_V2 + URL.VERIFY_OTP, data, authHeader());
+}
+
 const extractRoles = () => {
     const user = JSON.parse(localStorage.getItem("adria-user"));
     if (user) {
@@ -82,5 +86,6 @@ export default {
     NotvalidJwt,
     extractRoles,
     updatePassword,
-    sendOtp
+    sendOtp,
+    verifyOtp
 };     

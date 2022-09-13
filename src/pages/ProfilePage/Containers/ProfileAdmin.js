@@ -1,12 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { connect } from "react-redux";
+import PersonalProfile from '../../../common/containers/profile'
 
 
 
 const AdminProfile = (props) => {
 
   let navigate = useNavigate();
+
+
 
   if (!props.currentUser) {
     navigate("/login-admin");
@@ -16,29 +19,8 @@ const AdminProfile = (props) => {
 
   if (props.isLoggedIn) {
     return (
+      <PersonalProfile />
 
-        <div className="container">
-          <header className="jumbotron">
-            <h3>
-              <strong>{props.currentUser.emailUser}</strong>
-            </h3>
-          </header>
-          <p>
-            <strong>Token:</strong>
-            {props.currentUser.accessToken.substring(0, 60)}...
-          </p>
-          <p>
-            <strong>Email:</strong> {props.currentUser.emailUser}
-          </p>
-          <strong>Authorities:</strong>
-          <ul>
-            {props.currentUser.roles &&
-              props.currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-          </ul>
-
-
-        </div>
-     
     )
   }
 
