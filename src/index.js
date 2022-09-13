@@ -12,14 +12,14 @@ import App from './App';
 import Login from './pages/LoginPage/containers/LoginAdminContainer';
 import LoginClient from './pages/LoginPage/containers/LoginClientContainer';
 import ClientBoardContainer from './pages/ClientBoard/containers/ClientBoardContainer';
-import ProfileClient from './pages/ClientBoard/containers/profileClient';
 import AdminBoardContainer from './pages/AdminBoard/containers/AdminBoardContainer';
 import ClientInfo from './pages/AdminBoard/containers/ClientInfo';
 import ClientInfoAfter from './pages/AdminBoard/containers/ClientInfosAfter';
 import Error404 from './common/containers/404';
+import ProfileClient from './pages/ProfilePage/Containers/profileClient';
 import AdminProfile from './pages/ProfilePage/Containers/ProfileAdmin';
 import ClientBoard from './pages/ClientBoard/containers/ClientInfo';
-import Comptes from './pages/ClientBoard/components/comptes';
+import UpdatePass from './common/containers/changePassContainer';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -39,8 +39,8 @@ root.render(
             <Route path="services" element={<ClientBoard />} />
             <Route path="profile" element={<ProfileClient />} />
           </Route>
+        <Route path="update-password" element={<UpdatePass />} />
         </Route>
-        <Route path="comptes" element={<Comptes />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Provider>

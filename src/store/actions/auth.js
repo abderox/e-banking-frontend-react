@@ -73,6 +73,52 @@ const sendOtp = () => (dispatch) => {
         })
 }
 
+const verifyOtp = (otp) => (dispatch) => {
+    return AuthApi.verifyOtp(otp).then((response) => {
+        dispatch({
+            type: type.VERIFY_OTP_SUCCESS,
+            payload: response.data
+        });
+        return Promise.resolve();
+    },
+
+        (error) => {    
+            const message = error.response.data || error;
+            dispatch({
+                type: type.VERIFY_OTP_FAIL,
+            })
+            dispatch({
+                type: type.SET_MESSAGE,
+                payload: message
+            });
+
+            return Promise.reject(error);
+        })
+}
+
+const  updatePass=(data) => (dispatch)=>{
+    return AuthApi.updatePassword(data).then((response) => {
+        dispatch({
+            type: type.UPDATE_PASS_SUCCESS,
+            payload: response.data
+        });
+        return Promise.resolve();
+    }
+    ,
+    (error) => {
+        const message = error.response.data || error;
+        dispatch({
+            type: type.UPDATE_PASS_FAIL,
+        })
+        dispatch({
+            type: type.SET_MESSAGE,
+            payload: message
+        });
+
+        return Promise.reject(error);
+    })
+}
+
 const reload =
     () => (dispatch) => {
         dispatch({
@@ -87,5 +133,7 @@ export {
     setJwtExpired,
     setIsAdmin,
     setIsClient,
-    sendOtp
+    sendOtp,
+    verifyOtp,
+    updatePass
 };

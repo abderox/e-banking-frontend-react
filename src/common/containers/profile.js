@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
+import { Navigate, useNavigate } from 'react-router-dom';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import UpdateButton from '../components/updateButton';
 import ToastError from '../components/toastError';
@@ -11,6 +12,13 @@ import { sendOtp } from '../../store/actions/auth'
 function PersonalProfile(props) {
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!props.currentUser) {
+      navigate(-1);
+    }
+  }, []);
 
   const toast = {
     title: "success",
@@ -19,16 +27,20 @@ function PersonalProfile(props) {
     place: "toast-position"
   }
 
+  
 
   const handleSendOtp = () => {
     setLoading(true);
     props.sendOtp().then((res) => {
       console.log(res)
       setLoading(false);
-    
+      setTimeout(() => {
+        navigate("/update-password")
+      }, 3000);
+      
     }).catch((err) => {
       setLoading(false);
-    })  
+    })
   }
 
 
@@ -68,8 +80,15 @@ function PersonalProfile(props) {
                     </MDBRow>
 
                     <div className="d-flex justify-content-start">
-                      <UpdateButton loading={loading} handleSendOtp={handleSendOtp} />
+
+                      <UpdateButton loading={loading} disabled={props.update_pass.length > 1} handleSendOtp={handleSendOtp} />
+                       
                     </div>
+
+                    <div className="d-flex justify-content-start pt-2 mt-2">
+                    {props.update_pass.length > 1 && <small className="text-muted ">You have right to update your password once every session !</small>}
+                    </div>
+
                   </MDBCardBody>
                 </MDBCol>
               </MDBRow>
@@ -85,7 +104,9 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.auth.user,
     message: state.message.message,
-    otp_res: state.auth.otp_success
+    otp_res: state.auth.otp_success,
+    update_pass : state.auth.update_pass
+
   }
 }
 
