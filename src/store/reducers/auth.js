@@ -56,6 +56,16 @@ export default (state = initialState, action) => {
                 isClient : true,
             }
 
+        case type.SEND_OTP_SUCCESS:
+            return {
+                ...state,
+                otp_success : action.payload,
+            }
+        case type.SEND_OTP_FAIL:
+            return {
+                ...state,
+                otp_success : "",
+            }
 
         default:
             return state;

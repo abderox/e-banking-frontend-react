@@ -39,3 +39,5 @@ export const CLEAR_EDIT_CLIENT_RESPONSE = "CLEAR_EDIT_CLIENT_RESPONSE";
 export const EDIT_SUCCESS = "EDIT_SUCCESS";
 export const EDIT_FAIL = "EDIT_FAIL";
 export const CLEAR_ALL = "CLEAR_ALL";
+export const SEND_OTP_SUCCESS = "SEND_OTP_SUCCESS";
+export const SEND_OTP_FAIL = "SEND_OTP_FAIL";

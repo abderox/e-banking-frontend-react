@@ -79,7 +79,7 @@ export function Navbar(props) {
                                     </Tooltip>
                                 )}
                             </Overlay>
-                            <li className="mt-3 mr-2">
+                            <li className="mt-3 mr-2" >
                                 <Switchtoggle />
                             </li>
                         </>

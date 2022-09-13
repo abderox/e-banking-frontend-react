@@ -50,6 +50,14 @@ const NotvalidJwt = () => {
     return true;
 }
 
+const updatePassword = (data) => {
+    return axios.post(URL.API_URL_V2 + URL.UPDATE_PASSWORD, data, authHeader());
+}
+
+const sendOtp = () => {
+    return axios.get(URL.API_URL_V2 + URL.SEND_OTP, authHeader());
+}
+
 const extractRoles = () => {
     const user = JSON.parse(localStorage.getItem("adria-user"));
     if (user) {
@@ -69,5 +77,10 @@ const parseJwt = (token) => {
 };
 
 export default {
-    login, logout, NotvalidJwt,extractRoles
+    login,
+    logout,
+    NotvalidJwt,
+    extractRoles,
+    updatePassword,
+    sendOtp
 };     
