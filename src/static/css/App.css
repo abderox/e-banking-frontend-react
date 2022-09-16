@@ -450,3 +450,7 @@ font-weight: bold;
   background-color: #02af02;
   transition: all 0.2s ease-in-out;
 }
+
+.badge-margin-sessions{
+  margin-right: 10px;
+}

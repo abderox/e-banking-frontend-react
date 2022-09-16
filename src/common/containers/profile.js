@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import UpdateButton from '../components/updateButton';
+import ActiveSessions from '../components/sessionsMgmnt'
 import ToastError from '../components/toastError';
 import Toasts from '../components/toast';
 import { sendOtp } from '../../store/actions/auth'
@@ -27,7 +28,7 @@ function PersonalProfile(props) {
     place: "toast-position"
   }
 
-  
+
 
   const handleSendOtp = () => {
     setLoading(true);
@@ -37,7 +38,7 @@ function PersonalProfile(props) {
       setTimeout(() => {
         navigate("/update-password")
       }, 3000);
-      
+
     }).catch((err) => {
       setLoading(false);
     })
@@ -48,12 +49,12 @@ function PersonalProfile(props) {
     <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
       {props.message && <ToastError props={JSON.parse(props.message)} isdarkMode={props.isdarkMode} />}
       {props.otp_res && <Toasts props={toast} isdarkMode={props.isdarkMode} />}
-
       <MDBContainer className="py-5 h-100">
+
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="6" className="mb-4 mb-lg-0">
             <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
-              <MDBRow className="g-0">
+              <MDBRow className="g-0 pt-5">
                 <MDBCol md="4" className="gradient-custom text-center text-white"
                   style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
                   <MDBCardImage src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-client-internet-marketing-service-flaticons-flat-flat-icons-2.png"
@@ -82,14 +83,20 @@ function PersonalProfile(props) {
                     <div className="d-flex justify-content-start">
 
                       <UpdateButton loading={loading} disabled={props.update_pass.length > 1} handleSendOtp={handleSendOtp} />
-                       
+
                     </div>
 
                     <div className="d-flex justify-content-start pt-2 mt-2">
-                    {props.update_pass.length > 1 && <small className="text-muted ">You have right to update your password once every session !</small>}
+                      {props.update_pass.length > 1 && <small className="text-muted ">You have right to update your password once every session !</small>}
                     </div>
 
                   </MDBCardBody>
+                </MDBCol>
+              </MDBRow>
+              <hr className=" mt-4 " />
+              <MDBRow className="g-0">
+                <MDBCol className="text-center" md="12" >
+                  <ActiveSessions data={props.currentUser.agents} />
                 </MDBCol>
               </MDBRow>
             </MDBCard>
@@ -105,7 +112,7 @@ const mapStateToProps = (state) => {
     currentUser: state.auth.user,
     message: state.message.message,
     otp_res: state.auth.otp_success,
-    update_pass : state.auth.update_pass
+    update_pass: state.auth.update_pass
 
   }
 }
