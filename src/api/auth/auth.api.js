@@ -59,6 +59,15 @@ const logout = (url) => {
     });
 };
 
+const activeSessions = () => {
+    return axios.get(URL.API_URL_V2 + URL.ACTIVE_SESSIONS, authHeader());
+}
+
+const signoutSession = (data) => {
+    return axios.post(URL.API_URL_V2 + URL.SIGNOUT_SESSION, data, authHeader());
+}
+
+
 
 const NotvalidJwt = () => {
     const user = JSON.parse(localStorage.getItem("adria-user"));
@@ -113,4 +122,6 @@ export default {
     sendOtp,
     verifyOtp,
     userAgent,
+    activeSessions,
+    signoutSession
 };     

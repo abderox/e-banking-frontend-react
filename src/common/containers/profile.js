@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { Navigate, useNavigate } from 'react-router-dom';
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
+import {
+  MDBCol,
+  MDBContainer,
+  MDBRow, MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBTypography,
+  MDBIcon,
+  MDBBtn
+} from 'mdb-react-ui-kit';
 import UpdateButton from '../components/updateButton';
 import ActiveSessions from '../components/sessionsMgmnt'
 import ToastError from '../components/toastError';
 import Toasts from '../components/toast';
 import { sendOtp } from '../../store/actions/auth'
-
+import authApi from '../../api/auth/auth.api';
 
 
 function PersonalProfile(props) {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [session, setSession] = useState([]);
 
   useEffect(() => {
     if (!props.currentUser) {
@@ -26,6 +37,18 @@ function PersonalProfile(props) {
     body: props.otp_res,
     position: "top-center",
     place: "toast-position"
+  }
+
+
+  const handleActiveSessions = () => {
+
+    authApi.activeSessions().then((res) => {
+      console.log(res.data)
+      setSession(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+
   }
 
 
@@ -49,12 +72,12 @@ function PersonalProfile(props) {
     <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
       {props.message && <ToastError props={JSON.parse(props.message)} isdarkMode={props.isdarkMode} />}
       {props.otp_res && <Toasts props={toast} isdarkMode={props.isdarkMode} />}
-      <MDBContainer className="py-5 h-100">
+      <MDBContainer className="py-1 h-100">
 
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="6" className="mb-4 mb-lg-0">
             <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
-              <MDBRow className="g-0 pt-5">
+              <MDBRow className="g-0 ">
                 <MDBCol md="4" className="gradient-custom text-center text-white"
                   style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
                   <MDBCardImage src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-client-internet-marketing-service-flaticons-flat-flat-icons-2.png"
@@ -94,9 +117,12 @@ function PersonalProfile(props) {
                 </MDBCol>
               </MDBRow>
               <hr className=" mt-4 " />
-              <MDBRow className="g-0">
-                <MDBCol className="text-center" md="12" >
-                  <ActiveSessions data={props.currentUser.agents} />
+              <MDBRow className="g-0 ">
+                <MDBCol className="text-center " md="12" >
+                  <MDBBtn size='sm' rounded color='link' onClick={handleActiveSessions}>
+                    Refresh
+                  </MDBBtn>
+                  <ActiveSessions data={props.currentUser.agents} session={session} refresh={handleActiveSessions} />
                 </MDBCol>
               </MDBRow>
             </MDBCard>
