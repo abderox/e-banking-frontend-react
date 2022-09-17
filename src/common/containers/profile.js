@@ -71,7 +71,7 @@ function PersonalProfile(props) {
   return (
     <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
       {props.message && <ToastError props={JSON.parse(props.message)} isdarkMode={props.isdarkMode} />}
-      {props.otp_res && <Toasts props={toast} isdarkMode={props.isdarkMode} />}
+      {props.otp_res && props.update_pass.length < 1 && <Toasts props={toast} isdarkMode={props.isdarkMode} />}
       <MDBContainer className="py-1 h-100">
 
         <MDBRow className="justify-content-center align-items-center h-100">

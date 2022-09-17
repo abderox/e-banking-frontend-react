@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import {verifyOtp} from '../../store/actions/auth';
+import { verifyOtp } from '../../store/actions/auth';
+import { verifyOtpTransfer, clearAll } from '../../store/actions/frontoffice'
 import { apiMessage } from "../../store/actions";
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 
 function Otpinput(props) {
@@ -36,13 +37,23 @@ function Otpinput(props) {
             props.clearMessage();
             const value = Object.values(state).join("").substring(0, 6);
             console.log(value);
-            props.verifyOtp({otp: value}).then((res) => {
-                console.log(res);
-            }).catch((err) => {
-                console.log(err);
-            })
+            if (props.isTransfer) {
+                console.log("transfer")
+                props.verifyOtpTransfer({ otp: value }).then((res) => {
+                    props.clearAll();
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } else {
+                props.verifyOtp({ otp: value }).then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
+                })
+            }
 
-           
+
         }
 
     }
@@ -138,6 +149,7 @@ function Otpinput(props) {
                         onChange={e => handleChange("otp6", e)}
                         tabIndex="6" maxLength="1" onKeyUp={e => inputfocus(e)}
                     />
+
                 </div>
                 <button className="Verify" type="submit" disabled={state.disable}>
                     <img src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/FFFFFF/external-check-user-interface-tanah-basah-detailed-outline-tanah-basah.png" />
@@ -149,9 +161,10 @@ function Otpinput(props) {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownedProps) => {
     return {
-        auth: state.auth
+        auth: state.auth,
+        isTransfer: ownedProps.isTransfer
     }
 }
 
@@ -159,6 +172,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         verifyOtp: (data) => dispatch(verifyOtp(data)),
         clearMessage: () => dispatch(apiMessage.clearMessage()),
+        verifyOtpTransfer: (data) => dispatch(verifyOtpTransfer(data)),
+        clearAll: () => dispatch(clearAll())
     }
 }
 

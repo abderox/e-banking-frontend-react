@@ -1,6 +1,6 @@
 import * as type from '../actions/actionTypes';
 
-const initialState = { accountsClient: [], transactionsClient: [], benificiaresClient: [], transferCreated: false };
+const initialState = { accountsClient: [], transactionsClient: [], benificiaresClient: [], transferCreated: false ,otp_verified_transfer:"", otp_succ:""};
 
 export default (state = initialState, action) => {
 
@@ -80,8 +80,35 @@ export default (state = initialState, action) => {
                 ...state,
                 transferCreated: false,
                 editedSuccess: false,
+                otp_succ: "",
             }
 
+        case type.SEND_OTP_TRANSFER_SUCCESS:
+            return {
+                ...state,
+                otp_succ: action.payload
+            }
+        case type.SEND_OTP_TRANSFER_FAIL:
+            return {
+                ...state,
+                otp_succ: ""
+            }
+        case type.VERIFY_OTP_TRANSFER_SUCCESS:
+            return {
+                ...state,
+                otp_verified_transfer: action.payload
+            }
+        case type.VERIFY_OTP_TRANSFER_FAIL:
+            return {
+                ...state,
+                otp_verified_transfer: ""
+            }
+        case type.CLEAR_OTP_RESPONSE:
+            return {
+                ...state,
+                otp_verified_transfer: ""
+            }
+            
         default:
             return state;
     }
