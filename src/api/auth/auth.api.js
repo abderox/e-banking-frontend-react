@@ -7,11 +7,30 @@ import * as type from '../../utils/constants';
 import authHeader from "./auth-header";
 const URL = type.default;
 
-const login = (email, password, url) => {
+
+const getDatafromIP = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    const toString = JSON.stringify(res.data, null, 2)
+    const toObject = JSON.parse(toString)
+    return toObject['country_name'] + "," + toObject['IPv4']
+  }
+
+
+const userAgent = () => {
+    const agentInfo = window.navigator.userAgent.split(" ");
+    return axios.get('https://geolocation-db.com/json/').then(res => {
+        console.log(agentInfo[agentInfo.length - 1] +"," + res.data.country_name + "," + res.data.IPv4);
+        return agentInfo[agentInfo.length - 1] +"," + res.data.country_name + "," + res.data.IPv4;
+    })
+}
+
+
+const login = (email, password,agent, url) => {
     return axios
         .post(URL.AUTH_BASE_URL + url, {
             email,
             password,
+            agent 
         })
         .then((response) => {
             console.log("🚀 ~ file: auth.api.js ~ line 11 ~ .then ~ response", response)
@@ -30,6 +49,7 @@ const logout = (url) => {
     axios.get(URL.API_URL_V2 + url, authHeader()).then(response => {
         if (response.status === 200) {
             localStorage.removeItem("adria-user");
+            console.log("Successfully logged out");
         }
 
     }).catch(error => {
@@ -38,6 +58,15 @@ const logout = (url) => {
         }
     });
 };
+
+const activeSessions = () => {
+    return axios.get(URL.API_URL_V2 + URL.ACTIVE_SESSIONS, authHeader());
+}
+
+const signoutSession = (data) => {
+    return axios.post(URL.API_URL_V2 + URL.SIGNOUT_SESSION, data, authHeader());
+}
+
 
 
 const NotvalidJwt = () => {
@@ -72,6 +101,7 @@ const extractRoles = () => {
     return "null";
 }
 
+
 const parseJwt = (token) => {
     try {
         return JSON.parse(atob(token.split(".")[1]));
@@ -80,6 +110,9 @@ const parseJwt = (token) => {
     }
 };
 
+
+
+
 export default {
     login,
     logout,
@@ -87,5 +120,8 @@ export default {
     extractRoles,
     updatePassword,
     sendOtp,
-    verifyOtp
+    verifyOtp,
+    userAgent,
+    activeSessions,
+    signoutSession
 };     

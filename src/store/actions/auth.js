@@ -2,8 +2,8 @@ import * as type from './actionTypes';
 import AuthApi from '../../api/auth/auth.api';
 
 
-const login = (username, password, url) => (dispatch) => {
-    return AuthApi.login(username, password, url).then((response) => {
+const login = (username, password, agent,url) => (dispatch) => {
+    return AuthApi.login(username, password,agent, url).then((response) => {
         dispatch({
             type: type.LOGIN_SUCCESS,
             payload: response

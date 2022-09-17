@@ -10,6 +10,8 @@ const SIGN_UP_URL_CLIENT = "/auth/register-client";
 const UPDATE_PASSWORD = "/auth/update-password";
 const SEND_OTP = "/auth/send-otp"
 const VERIFY_OTP = "/auth/verify-otp";
+const ACTIVE_SESSIONS = "/auth/active-sessions";
+const SIGNOUT_SESSION = "/auth/sign-out-session";
 
 export default {
     API_URL_V1,
@@ -22,5 +24,7 @@ export default {
     SIGN_UP_URL_CLIENT,
     UPDATE_PASSWORD,
     SEND_OTP,
-    VERIFY_OTP
+    VERIFY_OTP,
+    ACTIVE_SESSIONS ,
+    SIGNOUT_SESSION
 };

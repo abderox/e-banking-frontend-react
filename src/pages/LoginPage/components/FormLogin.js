@@ -9,6 +9,7 @@ import { email, required } from '../../../utils/constraints';
 import InputText from '../components/inputText';
 import ButtonLogin from '../components/buttonLogin';
 import { login,setIsAdmin ,setIsClient} from "../../../store/actions/auth";
+import AuthApi from "../../../api/auth/auth.api"
 import PopoverPositioned from '../../../common/components/popover';
 
 
@@ -22,11 +23,19 @@ function FormLogin(props) {
     const [username, setUsername] = useState("");
     const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState("")
+    const [agent,setAgent] =  useState("");
     const [mQuery, setMQuery] = useState({
         matches: window.innerWidth > 768 ? true : false,
     });
 
     useEffect(() => {
+
+        AuthApi.userAgent().then(res => {
+            setAgent(res);
+            console.log(res + "useEffect")
+        })
+       
+        
         let mediaQuery = window.matchMedia("(min-width: 768px)");
         mediaQuery.addListener(setMQuery);
         return () => mediaQuery.removeListener(setMQuery);
@@ -69,7 +78,7 @@ function FormLogin(props) {
         form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
-            props.signing(username, password, props.loginUrl)
+            props.signing(username, password,agent, props.loginUrl)
                 .then(() => {
                     if(props.loginUrl.includes("admin"))
                     {
@@ -137,7 +146,7 @@ const mapToProps = (state, ownedProps) => {
 }
 const mapToDispatch = (dispatch) => {
     return {
-        signing: (username, password, url) => dispatch(login(username, password, url)),
+        signing: (username, password, agent,url) => dispatch(login(username, password, agent,url)),
         setIsAdmin: () => dispatch(setIsAdmin()),
         setIsClient: () => dispatch(setIsClient())
 

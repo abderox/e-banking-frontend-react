@@ -450,3 +450,16 @@ font-weight: bold;
   background-color: #02af02;
   transition: all 0.2s ease-in-out;
 }
+
+.badge-margin-sessions{
+  margin-right: 10px;
+}
+
+.max-height-sessions{
+  max-height: 35vh !important;
+  overflow-y: scroll;
+}
+
+.padding-sessions{
+  padding: 0.5rem 0 !important;
+}
