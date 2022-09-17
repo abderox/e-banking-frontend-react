@@ -7,6 +7,8 @@ import {
     makeTransfer,
     editBenificiare
 } from '../../api/client/client.services';
+import AuthApi from '../../api/auth/auth.api';
+
 
 
 const addBenificiareToClient = (data) => (dispatch) => {
@@ -169,6 +171,57 @@ const clearAll = () => {
     }
 }
 
+const sendOtpTransfer = () => (dispatch) => {
+    return AuthApi.sendOtp().then((response) => {
+        dispatch({
+            type: type.SEND_OTP_TRANSFER_SUCCESS,
+            payload: response.data
+        });
+        return Promise.resolve();
+    },
+        (error) => {
+            const message = error.response.data || error;
+            dispatch({
+                type: type.SEND_OTP_TRANSFER_FAIL,
+            })
+            dispatch({
+                type: type.SET_MESSAGE,
+                payload: message
+            });
+
+            return Promise.reject(error);
+        })
+}
+
+const verifyOtpTransfer = (otp) => (dispatch) => {
+    return AuthApi.verifyOtp(otp).then((response) => {
+        dispatch({
+            type: type.VERIFY_OTP_TRANSFER_SUCCESS,
+            payload: response.data
+        });
+        return Promise.resolve();
+    },
+
+        (error) => {    
+            const message = error.response.data || error;
+            dispatch({
+                type: type.VERIFY_OTP_TRANSFER_FAIL,
+            })
+            dispatch({
+                type: type.SET_MESSAGE,
+                payload: message
+            });
+
+            return Promise.reject(error);
+        })
+}
+
+const clearOtpResponse = () => {
+    return {
+        type: type.CLEAR_OTP_RESPONSE
+    }
+}
+
 
 
 
@@ -180,5 +233,8 @@ export {
     makeTransferTo,
     cleartransferCreated,
     editBenificiare_,
-    clearAll
+    clearAll,
+    sendOtpTransfer,
+    verifyOtpTransfer,
+    clearOtpResponse
 };

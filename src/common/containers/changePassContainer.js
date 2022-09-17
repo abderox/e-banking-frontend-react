@@ -104,7 +104,7 @@ function UpdatePass(props) {
                 <strong>Note warning:</strong> Please try not to refresh the page , you will proceed from Zero .
             </MDBTypography>
 
-            {props.otp_verified === "" ? <Otpinput /> :
+            {props.otp_verified === "" ? <Otpinput isTransfer={false} /> :
 
                 <><InputText data={passwordInput} handleChange={handleChange} value={data.password} />
                     <InputText data={passwordConfirm} handleChange={handleChange} value={data.confirm} />

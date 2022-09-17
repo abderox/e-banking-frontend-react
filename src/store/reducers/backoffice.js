@@ -79,6 +79,7 @@ export default (state = initialState, action) => {
             return {
                 editedClient: false
             }
+     
 
         default:
             return state;

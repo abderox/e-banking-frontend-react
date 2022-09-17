@@ -209,6 +209,8 @@ const clearEditClientResponse = () => {
 
 
 
+
+
 export {
     registerClient,
     clearCreatedClient,
@@ -221,5 +223,5 @@ export {
     clearUpdatedAccount,
     getClientsOfAgence,
     editClient_,
-    clearEditClientResponse
+    clearEditClientResponse,
 };
